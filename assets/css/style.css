@@ -4,6 +4,9 @@ html, body {
   overflow: auto;
   overflow-x: none;
 }
+body {
+  max-height: 100vh;
+}
 header {
   display: none;
 }
