@@ -15,11 +15,11 @@ $(function(){
 
   $('#buttonLeft').click(function() {
     if ($('#sideTimer').is(":visible")) {
-      $('#scramble, #timer').animate({right: '-=150px'})
       $('#sideTimer').toggle('fast');
+      $('#scramble, #timer').animate({right: '-=150px'});
     } else {
-      $('#scramble, #timer').animate({right: '+=150px'})
       $('#sideTimer').toggle('fast');
+      $('#scramble, #timer').animate({right: '+=150px'});
     }
   });
 });
