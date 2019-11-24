@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+  <title>Mon premier entraineur de Rubik's Cube</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="assets/css/timer.css">
+</head>
+
+<body class="bg-light">
+
+  <header class="bg-secondary row m-0">
+    <!-- Nav Tabs -->
+    <div id="topTabs" class="col-11 p-0">
+      <ul class="nav nav-tabs nav-fill">
+        <li class="nav-item">
+          <a class="nav-link border border-light border-bottom-0" href="#">Accueil</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link border border-light border-bottom-0" href="#">Timer</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link border border-light border-bottom-0" href="#">Leçons</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link border border-light border-bottom-0" href="#">Multi-joueurs</a>
+        </li>
+      </ul>
+    </div>
+    <div class="col p-0 ml-2">
+      <button type="submit" class="btn btn-light h-100">Compte</button>
+    </div>
+  </header>
+  <!-- Side Timer -->
+  <div id="timerContainer" class="d-flex">
+    <!-- Timer Stats -->
+    <div id="sideTimer" class="row m-0 bg-secondary">
+      <table id="solveList" class="table text-center table-responsive mb-0">
+        <thead class="thead-light">
+          <tr>
+            <th class="py-1">N°</th>
+            <th class="py-1">Time</th>
+            <th class="py-1">Ao5</th>
+            <th class="py-1">Ao12</th>
+          </tr>
+        </thead>
+        <tbody class="text-white">
+          <tr>
+            <td class="py-2 ">#535</td>
+            <td class="py-2 border border-light border-top-0 border-bottom-0">18:322</td>
+            <td class="py-2 border border-light border-left-0 border-top-0 border-bottom-0">17:643</td>
+            <td class="py-2 ">18:495</td>
+          </tr>
+          <tr>
+            <td class="py-2 border border-light border-left-0 border-right-0 border-bottom-0">#534</td>
+            <td class="py-2 border border-light border-bottom-0">16:619</td>
+            <td class="py-2 border border-light border-left-0 border-bottom-0">17:009</td>
+            <td class="py-2 border border-light border-left-0 border-right-0 border-bottom-0">1:18:502</td>
+          </tr>
+        </tbody>
+      </table>
+      <div id="sideStats" class="border border-left-0 border-right-0 border-light">
+        <table class="table text-center table-responsive mb-0">
+          <thead class="thead-light">
+            <tr>
+              <th class="p-1"></th>
+              <th class="py-1 w-100">Statistiques</th>
+              <th class="p-1"></th>
+            </tr>
+          </thead>
+        </table>
+        <div class="d-flex py-2 text-white">
+          <div class="text-left ml-4 mr-0 w-50">
+            <div>Numéro : </div>
+            <hr class="p-0 m-0 bg-light">
+            <div>Temps : </div>
+            <hr class="p-0 m-0 bg-light">
+            <div>Average of 5 : </div>
+            <hr class="p-0 m-0 bg-light">
+            <div>Average of 12 : </div>
+            <hr class="p-0 m-0 bg-light">
+            <div>Average of 50 : </div>
+          </div>
+          <div class="text-center mr-3 w-50">
+            <div>n° 535</div>
+            <hr class="p-0 m-0 bg-light">
+            <div>18:322 s</div>
+            <hr class="p-0 m-0 bg-light">
+            <div>17:643 s</div>
+            <hr class="p-0 m-0 bg-light">
+            <div>18:495 s</div>
+            <hr class="p-0 m-0 bg-light">
+            <div>17:709 s</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Bouton activateur -->
+    <div id="buttonLeft" class="btn-group-sm p-0">
+      <button type="button" class="btn btn-dark px-0 mx-0">></button>
+    </div>
+    <div id="timerBody" class="d-flex flex-column">
+      <!-- Mélange -->
+      <div class="row text-center m-0">
+        <h2 id="scramble" class="mt-4"><span class="py-2 px-4 border border-dark">B D2 B L2 R2 B2 U2 L2 F D2 F' L' B' L' B U' R U2 R2 D U'</span></h2>
+      </div>
+      <!-- Timer -->
+      <div class="row text-center mx-auto my-0 align-self-end">
+        <h1 id="timer"><span>0:00</span></h1>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <script src="assets/js/timer.js"></script>
+</body>
+</html>

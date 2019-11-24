@@ -12,4 +12,5 @@ $(function(){
       $('header').slideUp('slow');
     }
   })
+
 });
