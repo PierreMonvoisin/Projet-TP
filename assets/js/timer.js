@@ -8,7 +8,7 @@ $(function(){
     if ( mouseY < 2) {
       $('header').slideDown('fast');
     }
-    if ( mouseY > $('header').height()) {
+    if ( mouseY > ($('header').height() + 20)) {
       $('header').slideUp('slow');
     }
   });

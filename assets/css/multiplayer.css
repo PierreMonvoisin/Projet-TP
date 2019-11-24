@@ -1,8 +1,8 @@
 html, body {
+  max-height: 100vh;
   max-width: 100vw;
   scroll-behavior: smooth;
-  overflow: auto;
-  overflow-x: hidden;
+  overflow: hidden;
 }
 body {
   max-height: 100vh;
@@ -12,4 +12,10 @@ header {
 }
 #topTabs a {
   color: white;
+}
+.card {
+  max-height: 50vh;
+}
+#newsCard .card-body {
+  overflow-y: scroll;
 }
