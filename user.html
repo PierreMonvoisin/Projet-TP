@@ -8,7 +8,7 @@
   <link rel="stylesheet" type="text/css" href="assets/css/user.css">
 </head>
 
-<body class="bg-light">
+<body class="bg-silver">
 
   <header class="bg-secondary row m-0">
     <!-- Nav tabs -->
@@ -32,10 +32,123 @@
       <button type="submit" class="btn btn-light h-100"><a href="user.html" class="text-decoration-none text-dark stretched-link">Compte</a></button>
     </div>
   </header>
+  <div class="container-fluid w-100">
+    <div class="row bg-taupe">
+      <img id="topAvatar" class="mx-auto bg-light border border-dark" src="https://image.flaticon.com/icons/svg/163/163801.svg" alt="Avatar photo">
+    </div>
+  </div>
+  <div id="userStats" class="container w-100">
+    <div class="row justify-content-between">
+      <!-- Top statistique -->
+      <div class="userStat py-2 col-12 d-flex my-3 bg-copper justify-content-around">
+        <table class="col-5 table bg-light mb-0 text-center">
+          <thead>
+            <tr>
+              <th>/</th>
+              <th>Single</th>
+              <th>Ao5</th>
+              <th>Ao12</th>
+              <th>Ao50</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>Dernier</th>
+              <td>16:619</td>
+              <td>17:009</td>
+              <td>18:502</td>
+              <td>17:708</td>
+            </tr>
+            <tr>
+              <th>Meilleur</th>
+              <td>11:352</td>
+              <td>14:521</td>
+              <td>15:948</td>
+              <td>17:131</td>
+            </tr>
+            <tr>
+              <th>Pire</th>
+              <td>37:119</td>
+              <td>42:736</td>
+              <td>39:486</td>
+              <td>40:844</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="col-6 p-0" id="chartContainer">
+        </div>
+      </div>
+
+      <div class="userStat py-2 col-3 my-3 bg-copper">
+        <h5 class="text-center text-white">Liste d'amis</h5>
+        <div class="card">
+          <ul class="list-group">
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              Pierre Monvoisin
+              <span class="badge badge-success">En ligne</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              Lily Dubas
+              <span class="badge badge-success">En ligne</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              Felix Zemdegs
+              <span class="badge badge-warning text-white">Inactif</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              Max Park
+              <span class="badge badge-danger">Hors ligne</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div id="history" class="userStat py-2 col-8 my-3 bg-copper">
+        <h5 class="text-center text-white">Historique</h5>
+        <table class="table text-center">
+          <thead class="thead-light">
+            <tr>
+              <th class="py-1">N°</th>
+              <th class="py-1">Time</th>
+              <th class="py-1">Ao5</th>
+              <th class="py-1">Ao12</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="py-2">#535</td>
+              <td class="py-2">18:322</td>
+              <td class="py-2">17:643</td>
+              <td class="py-2">18:495</td>
+            </tr>
+            <tr>
+              <td class="py-2">#534</td>
+              <td class="py-2">16:619</td>
+              <td class="py-2">17:009</td>
+              <td class="py-2">18:502</td>
+            </tr>
+            <tr>
+              <td class="py-2">#533</td>
+              <td class="py-2">15:485</td>
+              <td class="py-2">18:085</td>
+              <td class="py-2">19:785</td>
+            </tr>
+            <tr>
+              <td class="py-2">#532</td>
+              <td class="py-2">14:426</td>
+              <td class="py-2">16:754</td>
+              <td class="py-2">18:721</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="assets/js/canvasjs-2.3.2/canvasjs.min.js"></script>
   <script src="assets/js/user.js"></script>
 </body>
 </html>

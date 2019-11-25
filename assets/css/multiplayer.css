@@ -7,6 +7,21 @@ html, body {
 body {
   max-height: 100vh;
 }
+.bg-silver {
+  background-color: #D3C0B8;
+}
+.bg-khaki {
+  background-color: #C6A08F;
+}
+.bg-copper {
+  background-color: #BF6B44;
+}
+.bg-taupe-light {
+  background-color: #7A6155;
+}
+.bg-taupe {
+  background-color: #463730;
+}
 header {
   display: none;
 }
