@@ -2,6 +2,8 @@ $(function(){
   var mouseX, mouseY;
 
   $(document).mousemove(function(e) {
+    e.stopPropagation();
+
     mouseX = e.pageX;
     mouseY = e.pageY;
     console.log('mouseY = ' + mouseY);
