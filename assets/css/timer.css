@@ -48,6 +48,11 @@ header {
   width: 100vw;
 }
 #timer {
-  margin-top: 28%;
-  font-size: 13em;
+  font-size: 12em;
+}
+#timer {
+  cursor: default;
+}
+#controls {
+  display: none;
 }
