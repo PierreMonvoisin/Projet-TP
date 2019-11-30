@@ -28,6 +28,7 @@ header {
   margin-top: 25%;
 }
 #timerContainer {
+  width: 100vw;
   height: 100vh;
 }
 #solveList {
