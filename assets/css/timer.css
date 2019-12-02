@@ -34,9 +34,14 @@ header {
 #solveList {
   font-size: 0.85em;
 }
+#solveList {
+  overflow-y: scroll;
+  height: 72%;
+}
 #sideTimer {
   display: none;
-  width: auto;
+  max-width: %;
+  height: 100vh;
 }
 #sideStats {
   white-space: nowrap;

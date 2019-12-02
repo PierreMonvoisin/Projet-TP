@@ -159,6 +159,90 @@ $(function(){
     return new Array(Math.max(length - time.length + 1, 0)).join("0") + time;
   }
 
+  // Calcul de la moyenne des 5 dernières résolutions
+  var solves5 = [], average5;
+  function averageOf5(hours, minutes, seconds, milliseconds) {
+    var average5Milli = hours * 3600000 + minutes * 60000 + seconds * 1000 + milliseconds;
+    solves5.splice(0, 0, average5Milli);
+    if ( solves5.length < 5){
+      average5 = '-';
+    } else {
+      for (var i = 0; i < 4; i++ ){
+        average5Milli += solves5[i];
+      }
+      average5Milli = average5Milli / 5;
+      solves5.splice(solves5.length - 1, 1);
+      hours = Math.floor(average5Milli / 3600000);
+      minutes = Math.floor( (average5Milli - (hours * 3600000)) / 60000 );
+      seconds = Math.floor( (average5Milli - (hours * 3600000) - (minutes * 60000)) / 1000 );
+      milliseconds = Math.floor(average5Milli - (hours * 3600000) - (minutes * 600000) - (seconds * 1000));
+      average5 = hours + ': ' + minutes + ': ' + seconds + '.' + milliseconds;
+      // Check si les heures sont nulles pour ne pas les afficher
+      if (hours == 0){
+        average5 = minutes + ': ' + seconds + '.' + milliseconds;
+      }
+      // Check si les heures et les minutes sont nulles pour ne pas les afficher
+      if (hours == 0 && minutes == 0){
+        average5 = seconds + '.' + milliseconds;
+      }
+    }
+  }
+  // Calcul de la moyenne des 12 dernières résolutions
+  var solves12 = [], average12;
+  function averageOf12(hours, minutes, seconds, milliseconds) {
+    var average12Milli = hours * 3600000 + minutes * 60000 + seconds * 1000 + milliseconds;
+    solves12.splice(0, 0, average12Milli);
+    if ( solves12.length < 12){
+      average12 = '-';
+    } else {
+      for (var i = 0; i < 11; i++ ){
+        average12Milli += solves12[i];
+      }
+      average12Milli = average12Milli / 12;
+      solves12.splice(solves12.length - 1, 1);
+      hours = Math.floor(average12Milli / 3600000);
+      minutes = Math.floor( (average12Milli - (hours * 3600000)) / 60000 );
+      seconds = Math.floor( (average12Milli - (hours * 3600000) - (minutes * 60000)) / 1000 );
+      milliseconds = Math.floor(average12Milli - (hours * 3600000) - (minutes * 600000) - (seconds * 1000));
+      average12 = hours + ': ' + minutes + ': ' + seconds + '.' + milliseconds;
+      // Check si les heures sont nulles pour ne pas les afficher
+      if (hours == 0){
+        average12 = minutes + ': ' + seconds + '.' + milliseconds;
+      }
+      // Check si les heures et les minutes sont nulles pour ne pas les afficher
+      if (hours == 0 && minutes == 0){
+        average12 = seconds + '.' + milliseconds;
+      }
+    }
+  }
+  // Calcul de la moyenne des 50 dernières résolutions
+  var solves50 = [], average50;
+  function averageOf50(hours, minutes, seconds, milliseconds) {
+    var average50Milli = hours * 3600000 + minutes * 60000 + seconds * 1000 + milliseconds;
+    solves50.splice(0, 0, average50Milli);
+    if ( solves50.length < 50){
+      average50 = '-';
+    } else {
+      for (var i = 0; i < 49; i++ ){
+        average50Milli += solves50[i];
+      }
+      average50Milli = average50Milli / 50;
+      solves50.splice(solves50.length - 1, 1);
+      hours = Math.floor(average50Milli / 3600000);
+      minutes = Math.floor( (average50Milli - (hours * 3600000)) / 60000 );
+      seconds = Math.floor( (average50Milli - (hours * 3600000) - (minutes * 60000)) / 1000 );
+      milliseconds = Math.floor(average50Milli - (hours * 3600000) - (minutes * 600000) - (seconds * 1000));
+      average50 = hours + ': ' + minutes + ': ' + seconds + '.' + milliseconds;
+      // Check si les heures sont nulles pour ne pas les afficher
+      if (hours == 0){
+        average50 = minutes + ': ' + seconds + '.' + milliseconds;
+      }
+      // Check si les heures et les minutes sont nulles pour ne pas les afficher
+      if (hours == 0 && minutes == 0){
+        average50 = seconds + '.' + milliseconds;
+      }
+    }
+  }
   // Ajout de la résolution au side stats
   function addToLog(hours, minutes, seconds, milliseconds){
     // Récupère l'indice de la dernière résolution ou lui attribut "1" si première résolution
@@ -174,15 +258,31 @@ $(function(){
       newTime = minutes + ': ' + seconds + '.' + milliseconds;
     }
     // Check si les heures et les minutes sont nulles pour ne pas les afficher
-    if (hours == 0 & minutes == 0){
+    if (hours == 0 && minutes == 0){
       newTime = seconds + '.' + milliseconds;
     }
+    // Calcul des moyennes
+    averageOf5(hours, minutes, seconds, milliseconds);
+    averageOf12(hours, minutes, seconds, milliseconds);
+    averageOf50(hours, minutes, seconds, milliseconds);
+    // Retire le message à la première résolution
+    $('#noSolve').hide();
     // Création d'une nouvelle ligne pour ajouter les informations
     var tr, _tr = '</tr>', tdSide, td1, td2, _td = '</td>';
     tr = '<tr id="' + solveIndex + '">';
-    tdSide = '<td class="py-2 border border-light border-left-0 border-right-0 border-top-0">';
-    td1 = '<td class="py-2 border border-light border-top-0">';
-    td2 = '<td class="py-2 border border-light border-left-0 border-top-0">';
-    $('#solveList tbody').prepend(tr + '\n' + tdSide + '#' + solveIndex + _td + '\n' + td1 + newTime + _td + '\n' + td2 + 'Average5' + _td + '\n' + tdSide + 'Average12' + _td + _tr);
+    tdSide = '<td class="py-1 px-2 border border-light border-left-0 border-right-0 border-top-0">';
+    td1 = '<td class="py-1 px-2 border border-light border-top-0">';
+    td2 = '<td class="py-1 px-2 border border-light border-left-0 border-top-0">';
+    $('#solveList tbody').prepend(tr + '\n' + tdSide + '#' + solveIndex + _td + '\n' + td1 + newTime + _td + '\n' + td2 + average5 + _td + '\n' + tdSide + average12 + _td + _tr);
+    // Ajout des informations aux statistiques de la side barre
+    addToStats(solveIndex, newTime, average5, average12, average50);
+  }
+  // Ajout des statistiques à la side barre
+  function addToStats(solveIndex, newTime, average5, average12, average50){
+    $('#sideStatIndex').html(solveIndex);
+    $('#sideStatSingle').html(newTime);
+    $('#sideStatAo5').html(average5);
+    $('#sideStatAo12').html(average12);
+    $('#sideStatAo50').html(average50);
   }
 });
