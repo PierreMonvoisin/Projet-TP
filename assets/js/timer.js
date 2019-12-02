@@ -113,6 +113,7 @@ $(function(){
         $('#scramble').html('<span class="py-2 px-2 border border-dark">' + newScramble + '</span>');
       }
       scramble = newScramble;
+      addToLog(hours, minutes, seconds, milliseconds);
     }
   });
   // Update time in stopwatch periodically - every 1ms
@@ -156,5 +157,32 @@ $(function(){
   function prependZero(time, length) {
     time = new String(time);    // stringify time
     return new Array(Math.max(length - time.length + 1, 0)).join("0") + time;
+  }
+
+  // Ajout de la résolution au side stats
+  function addToLog(hours, minutes, seconds, milliseconds){
+    // Récupère l'indice de la dernière résolution ou lui attribut "1" si première résolution
+    var solveIndex = Number($('#solveList tbody tr:first-child').attr('id'));
+    if (isNaN(solveIndex)){
+      solveIndex = 1;
+    } else {
+      solveIndex = solveIndex + 1;
+    }
+    // Check si les heures sont nulles pour ne pas les afficher
+    var newTime = hours + ': ' + minutes + ': ' + seconds + '.' + milliseconds;
+    if (hours == 0){
+      newTime = minutes + ': ' + seconds + '.' + milliseconds;
+    }
+    // Check si les heures et les minutes sont nulles pour ne pas les afficher
+    if (hours == 0 & minutes == 0){
+      newTime = seconds + '.' + milliseconds;
+    }
+    // Création d'une nouvelle ligne pour ajouter les informations
+    var tr, _tr = '</tr>', tdSide, td1, td2, _td = '</td>';
+    tr = '<tr id="' + solveIndex + '">';
+    tdSide = '<td class="py-2 border border-light border-left-0 border-right-0 border-top-0">';
+    td1 = '<td class="py-2 border border-light border-top-0">';
+    td2 = '<td class="py-2 border border-light border-left-0 border-top-0">';
+    $('#solveList tbody').prepend(tr + '\n' + tdSide + '#' + solveIndex + _td + '\n' + td1 + newTime + _td + '\n' + td2 + 'Average5' + _td + '\n' + tdSide + 'Average12' + _td + _tr);
   }
 });
