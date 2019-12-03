@@ -13,9 +13,37 @@ $(function(){
     }
   });
 
+  // Accès au log des résolutions
+  var index, single, ao5, ao12, ao50;
+  // Affiche les dernières valeurs au chargement de la page
+  index = JSON.parse(localStorage.getItem('indexLog'));
+  single = JSON.parse(localStorage.getItem('singleLog'));
+  ao5 = JSON.parse(localStorage.getItem('averageOf5Log'));
+  ao12 = JSON.parse(localStorage.getItem('averageOf12Log'));
+  ao50 = JSON.parse(localStorage.getItem('averageOf50Log'));
+
+  $('#lastSingle').html(single); $('#lastAo5').html(ao5); $('#lastAo12').html(ao12); $('#lastAo50').html(ao50);
+  // Check le localStorage pour les valeurs des résolutions et les affiches dans l'html
+  setInterval(function() {
+    index = JSON.parse(localStorage.getItem('indexLog'));
+    single = JSON.parse(localStorage.getItem('singleLog'));
+    ao5 = JSON.parse(localStorage.getItem('averageOf5Log'));
+    ao12 = JSON.parse(localStorage.getItem('averageOf12Log'));
+    ao50 = JSON.parse(localStorage.getItem('averageOf50Log'));
+
+    $('#lastSingle').html(single); $('#lastAo5').html(ao5); $('#lastAo12').html(ao12); $('#lastAo50').html(ao50);
+    // $('#bestSingle').html(single), $('#bestAo5').html(ao5), $('#bestAo12').html(ao12), $('#bestAo50').html(ao50);
+    // $('#worstSingle').html(single), $('#worstAo5').html(ao5), $('#worstAo12').html(ao12), $('#worstAo50').html(ao50);
+    // Création d'une nouvelle ligne pour ajouter les informations
+
+    // Ajout de la résolution à l'historique
+    // var tr = '<tr id="' + index + '">', _tr = '</tr>', td  = '<td class="py-2">', _td = '</td>';
+    // $('#history tbody').prepend(tr + '\n' + td + '#' + index + _td + '\n' + td + single + _td + '\n' + td + ao5 + _td + '\n' + td + ao12 + _td + '\n' + td + ao50 + _td + _tr);
+  }, 10000);
+
   // Graph
   var dataTestX = new Date(2019, 11, 14);
-  var dataTestY = 12.563
+  var dataTestY = 12.563;
 
   var chart = new CanvasJS.Chart('chartContainer', {
     animationEnabled: true,
@@ -94,9 +122,4 @@ $(function(){
     }]
   });
   chart.render();
-
-  // Accès au log des résolutions
-  $(document).keypress(function(){
-    alert(JSON.parse(localStorage.getItem('indexLog')));
-  })
 });
