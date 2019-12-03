@@ -94,4 +94,9 @@ $(function(){
     }]
   });
   chart.render();
+
+  // Accès au log des résolutions
+  $(document).keypress(function(){
+    alert(JSON.parse(localStorage.getItem('indexLog')));
+  })
 });
