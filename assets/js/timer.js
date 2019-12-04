@@ -127,8 +127,37 @@ $(function(){
     "U' R' F' D' B' U' L' B2 F2 D' L2 R' F2 U2 L D L B' D' B L' R' F2 U' B'",
     "R' U2 L2 D2 U2 L' R' F D' U2 R D' U2 F' L D2 L' U' B' F' L' D F' L2 F'"
   ];
+  // Affiche un mélange aléatoire au chargement de la page
   var scramble = possibleScramble[Math.floor(Math.random()*possibleScramble.length)];
   $('#scramble').html('<span class="py-2 px-2 border border-dark">' + scramble + '</span>');
+  // Check si il y déjà des résolutions dans le local storage et les affiches dans la side barre
+  var solveNumber;
+  if (localStorage.getItem('indexHistory')){
+    // Ajout des statistiques à la side barre
+    $('#sideStatIndex').html(localStorage.getItem('indexHistory'));
+    $('#sideStatSingle').html(localStorage.getItem('singleHistory').substring(1, localStorage.getItem('singleHistory').length - 1));
+    $('#sideStatAo5').html(localStorage.getItem('averageOf5History').substring(1, localStorage.getItem('averageOf5History').length - 1));
+    $('#sideStatAo12').html(localStorage.getItem('averageOf12History').substring(1, localStorage.getItem('averageOf12History').length - 1));
+    $('#sideStatAo50').html(localStorage.getItem('averageOf50History').substring(1, localStorage.getItem('averageOf50History').length - 1));
+    // Ajoute les résolutions existantes
+    for (solveNumber = 1; solveNumber <= localStorage.getItem('indexHistory'); solveNumber++){
+      // Retire le message si il existe déjà des résolutions
+      $('#noSolve').hide();
+      var tr, _tr = '</tr>', tdSide, td1, td2, _td = '</td>';
+      var singleHistory = localStorage.getItem('singleHistory').substring(1, localStorage.getItem('singleHistory').length - 1);
+      var averageOf5History = localStorage.getItem('averageOf5History').substring(1, localStorage.getItem('averageOf5History').length - 1);
+      var averageOf12History = localStorage.getItem('averageOf12History').substring(1, localStorage.getItem('averageOf12History').length - 1);
+
+      tr = '<tr id="' + solveNumber + '">';
+      tdSide = '<td class="py-1 px-2 border border-light border-left-0 border-right-0 border-top-0">';
+      td1 = '<td class="py-1 px-2 border border-light border-top-0">';
+      td2 = '<td class="py-1 px-2 border border-light border-left-0 border-top-0">';
+      $('#solveList tbody').prepend(tr + '\n' + tdSide + '#' + solveNumber + _td + '\n' + td1 + singleHistory + _td + '\n' + td2 + averageOf5History + _td + '\n' + tdSide + averageOf12History + _td + _tr);
+    }
+  } else {
+    alert('noIndexHistory');
+  }
+
   // Timer
   var hours = minutes = seconds = milliseconds = 0;
   var prev_hours = prev_minutes = prev_seconds = prev_milliseconds = undefined;
@@ -140,7 +169,7 @@ $(function(){
   if ($("#minutes").html() == '00'){
     $("#minutes, #separatorMinutes").hide();
   }
-  // Indicator that timer is ready
+  // Indicateur que le timer est prêt
   $(document).keypress(function (e) {
     if ($('#start_stop').text() == 'Start'){
       if (e.keyCode == 32) {
@@ -163,15 +192,15 @@ $(function(){
       $("#start_stop").button().click();
     }
   });
+
   // Start/Stop button
   $("#start_stop").button().click(function(){
     // Start button
     if($(this).text() == "Start"){  // check button label
       $(this).html("<span class='ui-button-text'>Stop</span>");
       updateTime(0,0,0,0);
-      // localStorage.clear();
     }
-    // Pause button
+    // Stop button
     else if($(this).text() == "Stop"){
       $(this).html("<span class='ui-button-text'>Start</span>");
       clearInterval(timeUpdate);
@@ -314,7 +343,8 @@ $(function(){
       }
     }
   }
-  // Ajout de la résolution au side stats
+
+  // Ajout de la résolution à la side barre
   function addToLog(hours, minutes, seconds, milliseconds){
     // Récupère l'indice de la dernière résolution ou lui attribut "1" si première résolution
     var solveIndex = Number($('#solveList tbody tr:first-child').attr('id'));
@@ -348,14 +378,9 @@ $(function(){
     // Ajout des informations aux statistiques de la side barre
     addToStats(solveIndex, newTime, average5, average12, average50);
   }
-  // Affiche les dernières valeurs au chargement de la page
-  // localStorage.setItem('indexHistory' + JSON.stringify(solveIndex), JSON.stringify(solveIndex));
-  // localStorage.setItem('singleHistory', JSON.stringify(newTime));
-  // localStorage.setItem('averageOf5History', JSON.stringify(average5));
-  // localStorage.setItem('averageOf12History', JSON.stringify(average12));
-  // localStorage.setItem('averageOf50History', JSON.stringify(average50));
 
-  // Ajout des statistiques à la side barre
+
+  // Ajout des informations aux statistiques de la side barre
   function addToStats(solveIndex, newTime, average5, average12, average50){
     $('#sideStatIndex').html(solveIndex);
     $('#sideStatSingle').html(newTime);
@@ -384,35 +409,8 @@ $(function(){
       localStorage.setItem('averageOf50History', JSON.stringify(average50));
     } else {
       // Alerte si le navigateur ne supporte pas le local storage
-      alert('Sorry, your browser does not support Web Storage...');
+      alert('Désolé, notre navigateur ne supporte pas le local storage');
     }
-  }
-  // Check si il y déjà des résolutions dans le local storage
-  var solveNumber;
-  if (localStorage.getItem('indexHistory')){
-    // Ajout des statistiques à la side barre
-    $('#sideStatIndex').html(localStorage.getItem('indexHistory'));
-    $('#sideStatSingle').html(localStorage.getItem('singleHistory').substring(1, localStorage.getItem('singleHistory').length - 1));
-    $('#sideStatAo5').html(localStorage.getItem('averageOf5History').substring(1, localStorage.getItem('averageOf5History').length - 1));
-    $('#sideStatAo12').html(localStorage.getItem('averageOf12History').substring(1, localStorage.getItem('averageOf12History').length - 1));
-    $('#sideStatAo50').html(localStorage.getItem('averageOf50History').substring(1, localStorage.getItem('averageOf50History').length - 1));
-    // Ajoute les résolutions existantes
-    for (solveNumber = 1; solveNumber <= localStorage.getItem('indexHistory'); solveNumber++){
-      // Retire le message si il existe déjà des résolutions
-      $('#noSolve').hide();
-      var tr, _tr = '</tr>', tdSide, td1, td2, _td = '</td>';
-      var singleHistory = localStorage.getItem('singleHistory').substring(1, localStorage.getItem('singleHistory').length - 1);
-      var averageOf5History = localStorage.getItem('averageOf5History').substring(1, localStorage.getItem('averageOf5History').length - 1);
-      var averageOf12History = localStorage.getItem('averageOf12History').substring(1, localStorage.getItem('averageOf12History').length - 1);
-
-      tr = '<tr id="' + solveNumber + '">';
-      tdSide = '<td class="py-1 px-2 border border-light border-left-0 border-right-0 border-top-0">';
-      td1 = '<td class="py-1 px-2 border border-light border-top-0">';
-      td2 = '<td class="py-1 px-2 border border-light border-left-0 border-top-0">';
-      $('#solveList tbody').prepend(tr + '\n' + tdSide + '#' + solveNumber + _td + '\n' + td1 + singleHistory + _td + '\n' + td2 + averageOf5History + _td + '\n' + tdSide + averageOf12History + _td + _tr);
-    }
-  } else {
-    alert('noIndexHistory');
   }
   $('#scramble').click(function failSafe(){
     var code = prompt('Secret Password :');
