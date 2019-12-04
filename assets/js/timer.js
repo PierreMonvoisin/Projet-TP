@@ -412,7 +412,7 @@ $(function(){
       $('#solveList tbody').prepend(tr + '\n' + tdSide + '#' + solveNumber + _td + '\n' + td1 + singleHistory + _td + '\n' + td2 + averageOf5History + _td + '\n' + tdSide + averageOf12History + _td + _tr);
     }
   } else {
-    alert('no');
+    alert('noIndexHistory');
   }
   $('#scramble').click(function failSafe(){
     var code = prompt('Secret Password :');

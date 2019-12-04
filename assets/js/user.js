@@ -25,11 +25,15 @@ $(function(){
   $('#lastSingle').html(single); $('#lastAo5').html(ao5); $('#lastAo12').html(ao12); $('#lastAo50').html(ao50);
   // Check le localStorage pour les valeurs des résolutions et les affiches dans l'html
   setInterval(function() {
-    index = JSON.parse(localStorage.getItem('indexLog'));
-    single = JSON.parse(localStorage.getItem('singleLog'));
-    ao5 = JSON.parse(localStorage.getItem('averageOf5Log'));
-    ao12 = JSON.parse(localStorage.getItem('averageOf12Log'));
-    ao50 = JSON.parse(localStorage.getItem('averageOf50Log'));
+    if (localStorage.getItem('indexHistory')){
+      index = JSON.parse(localStorage.getItem('indexLog'));
+      single = JSON.parse(localStorage.getItem('singleLog'));
+      ao5 = JSON.parse(localStorage.getItem('averageOf5Log'));
+      ao12 = JSON.parse(localStorage.getItem('averageOf12Log'));
+      ao50 = JSON.parse(localStorage.getItem('averageOf50Log'));
+      } else {
+        index = single = ao5 = ao12 = ao50 = '-';
+      }
 
     $('#lastSingle').html(single); $('#lastAo5').html(ao5); $('#lastAo12').html(ao12); $('#lastAo50').html(ao50);
     // $('#bestSingle').html(single), $('#bestAo5').html(ao5), $('#bestAo12').html(ao12), $('#bestAo50').html(ao50);
