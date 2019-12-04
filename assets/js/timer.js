@@ -132,16 +132,18 @@ $(function(){
   $('#scramble').html('<span class="py-2 px-2 border border-dark">' + scramble + '</span>');
   // Check si il y déjà des résolutions dans le local storage et les affiches dans la side barre
   var solveNumber;
-  var indexHistory = 0;
-  if (localStorage.getItem('indexHistory')){
+  var indexHistory;
+  if (localStorage.getItem('indexHistory1')){
+    var lastKey = localStorage.getItem('indexLog');
+    // Ajout des statistiques à la side barre
+    $('#sideStatIndex').html(localStorage.getItem('indexLog'));
+    $('#sideStatSingle').html(localStorage.getItem('singleLog').substring(1, localStorage.getItem('singleLog').length - 1));
+    $('#sideStatAo5').html(localStorage.getItem('averageOf5Log').substring(1, localStorage.getItem('averageOf5Log').length - 1));
+    $('#sideStatAo12').html(localStorage.getItem('averageOf12Log').substring(1, localStorage.getItem('averageOf12Log').length - 1));
+    $('#sideStatAo50').html(localStorage.getItem('averageOf50Log').substring(1, localStorage.getItem('averageOf50Log').length - 1));
     // Ajoute les résolutions existantes
-    for (solveNumber = 1; solveNumber <= localStorage.getItem(`indexHistory${indexHistory}`); solveNumber++){
-      // Ajout des statistiques à la side barre
-      $('#sideStatIndex').html(localStorage.getItem(`indexHistory${solveNumber}`));
-      $('#sideStatSingle').html(localStorage.getItem(`singleHistory${solveNumber}`).substring(1, localStorage.getItem(`singleHistory${solveNumber}`).length - 1));
-      $('#sideStatAo5').html(localStorage.getItem(`averageOf5History${solveNumber}`).substring(1, localStorage.getItem(`averageOf5History${solveNumber}`).length - 1));
-      $('#sideStatAo12').html(localStorage.getItem(`averageOf12History${solveNumber}`).substring(1, localStorage.getItem(`averageOf12History${solveNumber}`).length - 1));
-      $('#sideStatAo50').html(localStorage.getItem(`averageOf50History${solveNumber}`).substring(1, localStorage.getItem(`averageOf50History${solveNumber}`).length - 1));
+    for (solveNumber = 1; solveNumber <= localStorage.getItem(`indexLog`); solveNumber++){
+      // alert(solveNumber);
       // Retire le message si il existe déjà des résolutions
       $('#noSolve').hide();
       var tr, _tr = '</tr>', tdSide, td1, td2, _td = '</td>';
@@ -264,8 +266,14 @@ $(function(){
   var solves5 = [], average5;
   function averageOf5(hours, minutes, seconds, milliseconds) {
     var average5Milli = hours * 3600000 + minutes * 60000 + seconds * 1000 + milliseconds;
+    // if (localStorage.getItem('indexHistory1')){}
     solves5.splice(0, 0, average5Milli);
-    if ( solves5.length < 5){
+    // Actualise la dernière clef
+    lastKey = Number(localStorage.getItem('indexLog'));
+    if (lastKey > 4){
+
+    }
+    if (solves5.length < 5){
       average5 = '-';
     } else {
       for (var i = 0; i < 4; i++ ){
@@ -402,7 +410,7 @@ $(function(){
       localStorage.setItem('averageOf5Log', JSON.stringify(average5));
       localStorage.setItem('averageOf12Log', JSON.stringify(average12));
       localStorage.setItem('averageOf50Log', JSON.stringify(average50));
-      indexHistory = localStorage.setItem('indexLog')
+      indexHistory = localStorage.getItem('indexLog');
       // Ajoute la résolution au local storage history
       localStorage.setItem(`indexHistory${indexHistory}`, JSON.stringify(solveIndex));
       localStorage.setItem(`singleHistory${indexHistory}`, JSON.stringify(newTime));
@@ -410,7 +418,7 @@ $(function(){
       localStorage.setItem(`averageOf12History${indexHistory}`, JSON.stringify(average12));
       localStorage.setItem(`averageOf50History${indexHistory}`, JSON.stringify(average50));
 
-      alert(localStorage.getItem(`indexHistory${indexHistory}`));
+      // alert(localStorage.key(indexHistory));
     } else {
       // Alerte si le navigateur ne supporte pas le local storage
       alert('Désolé, notre navigateur ne supporte pas le local storage');
