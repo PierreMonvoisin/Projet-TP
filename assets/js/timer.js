@@ -261,7 +261,16 @@ $(function(){
     time = new String(time);    // stringify time
     return new Array(Math.max(length - time.length + 1, 0)).join("0") + time;
   }
-
+  function unfoldTime(time){
+    time = ((JSON.stringify(time)).substring(1, time.length - 1)).split(':');
+    if (time.length == 1){
+      alert('seconds and milliseconds');
+      // Turn into milliseconds
+    } else if (time.length == 2){
+      alert('minutes, seconds and milliseconds');
+      // Split the minutes and turn into milliseconds
+    }
+  }
   // Calcul de la moyenne des 5 dernières résolutions
   var solves5 = [], average5;
   function averageOf5(hours, minutes, seconds, milliseconds) {
@@ -271,7 +280,14 @@ $(function(){
     // Actualise la dernière clef
     lastKey = Number(localStorage.getItem('indexLog'));
     if (lastKey > 4){
-
+      var solveInHistory = solves5.splice(0, 0, localStorage.getItem(`singleHistory${lastKey}`));
+      unfoldTime(solveInHistory);
+      for (var i = 0; i < 3; i++ ){
+        lastKey--;
+        solveInHistory = localStorage.getItem(`singleHistory${lastKey}`);
+        unfoldTime(solveInHistory);
+        solves5.splice(0, 0, solveInHistory);
+      }
     }
     if (solves5.length < 5){
       average5 = '-';
