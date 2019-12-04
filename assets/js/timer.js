@@ -132,21 +132,22 @@ $(function(){
   $('#scramble').html('<span class="py-2 px-2 border border-dark">' + scramble + '</span>');
   // Check si il y déjà des résolutions dans le local storage et les affiches dans la side barre
   var solveNumber;
+  var indexHistory = 0;
   if (localStorage.getItem('indexHistory')){
-    // Ajout des statistiques à la side barre
-    $('#sideStatIndex').html(localStorage.getItem('indexHistory'));
-    $('#sideStatSingle').html(localStorage.getItem('singleHistory').substring(1, localStorage.getItem('singleHistory').length - 1));
-    $('#sideStatAo5').html(localStorage.getItem('averageOf5History').substring(1, localStorage.getItem('averageOf5History').length - 1));
-    $('#sideStatAo12').html(localStorage.getItem('averageOf12History').substring(1, localStorage.getItem('averageOf12History').length - 1));
-    $('#sideStatAo50').html(localStorage.getItem('averageOf50History').substring(1, localStorage.getItem('averageOf50History').length - 1));
     // Ajoute les résolutions existantes
-    for (solveNumber = 1; solveNumber <= localStorage.getItem('indexHistory'); solveNumber++){
+    for (solveNumber = 1; solveNumber <= localStorage.getItem(`indexHistory${indexHistory}`); solveNumber++){
+      // Ajout des statistiques à la side barre
+      $('#sideStatIndex').html(localStorage.getItem(`indexHistory${solveNumber}`));
+      $('#sideStatSingle').html(localStorage.getItem(`singleHistory${solveNumber}`).substring(1, localStorage.getItem(`singleHistory${solveNumber}`).length - 1));
+      $('#sideStatAo5').html(localStorage.getItem(`averageOf5History${solveNumber}`).substring(1, localStorage.getItem(`averageOf5History${solveNumber}`).length - 1));
+      $('#sideStatAo12').html(localStorage.getItem(`averageOf12History${solveNumber}`).substring(1, localStorage.getItem(`averageOf12History${solveNumber}`).length - 1));
+      $('#sideStatAo50').html(localStorage.getItem(`averageOf50History${solveNumber}`).substring(1, localStorage.getItem(`averageOf50History${solveNumber}`).length - 1));
       // Retire le message si il existe déjà des résolutions
       $('#noSolve').hide();
       var tr, _tr = '</tr>', tdSide, td1, td2, _td = '</td>';
-      var singleHistory = localStorage.getItem('singleHistory').substring(1, localStorage.getItem('singleHistory').length - 1);
-      var averageOf5History = localStorage.getItem('averageOf5History').substring(1, localStorage.getItem('averageOf5History').length - 1);
-      var averageOf12History = localStorage.getItem('averageOf12History').substring(1, localStorage.getItem('averageOf12History').length - 1);
+      var singleHistory = localStorage.getItem(`singleHistory${solveNumber}`).substring(1, localStorage.getItem(`singleHistory${solveNumber}`).length - 1);
+      var averageOf5History = localStorage.getItem(`averageOf5History${solveNumber}`).substring(1, localStorage.getItem(`averageOf5History${solveNumber}`).length - 1);
+      var averageOf12History = localStorage.getItem(`averageOf12History${solveNumber}`).substring(1, localStorage.getItem(`averageOf12History${solveNumber}`).length - 1);
 
       tr = '<tr id="' + solveNumber + '">';
       tdSide = '<td class="py-1 px-2 border border-light border-left-0 border-right-0 border-top-0">';
@@ -401,17 +402,21 @@ $(function(){
       localStorage.setItem('averageOf5Log', JSON.stringify(average5));
       localStorage.setItem('averageOf12Log', JSON.stringify(average12));
       localStorage.setItem('averageOf50Log', JSON.stringify(average50));
+      indexHistory = localStorage.setItem('indexLog')
       // Ajoute la résolution au local storage history
-      localStorage.setItem('indexHistory', JSON.stringify(solveIndex));
-      localStorage.setItem('singleHistory', JSON.stringify(newTime));
-      localStorage.setItem('averageOf5History', JSON.stringify(average5));
-      localStorage.setItem('averageOf12History', JSON.stringify(average12));
-      localStorage.setItem('averageOf50History', JSON.stringify(average50));
+      localStorage.setItem(`indexHistory${indexHistory}`, JSON.stringify(solveIndex));
+      localStorage.setItem(`singleHistory${indexHistory}`, JSON.stringify(newTime));
+      localStorage.setItem(`averageOf5History${indexHistory}`, JSON.stringify(average5));
+      localStorage.setItem(`averageOf12History${indexHistory}`, JSON.stringify(average12));
+      localStorage.setItem(`averageOf50History${indexHistory}`, JSON.stringify(average50));
+
+      alert(localStorage.getItem(`indexHistory${indexHistory}`));
     } else {
       // Alerte si le navigateur ne supporte pas le local storage
       alert('Désolé, notre navigateur ne supporte pas le local storage');
     }
   }
+  // Nettoyage du local storage si besoin
   $('#scramble').click(function failSafe(){
     var code = prompt('Secret Password :');
     if (code == 'reset'){
