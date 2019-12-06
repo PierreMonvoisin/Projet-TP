@@ -5,7 +5,6 @@ $(function(){
   $(document).mousemove(function(e) {
     mouseX = e.pageX;
     mouseY = e.pageY;
-    console.log('mouseY = ' + mouseY);
     if ( mouseY < 2) {
       $('header').slideDown('fast');
     }
@@ -262,36 +261,55 @@ $(function(){
     return new Array(Math.max(length - time.length + 1, 0)).join("0") + time;
   }
   function unfoldTime(time){
-    time = ((JSON.stringify(time)).substring(1, time.length - 1)).split(':');
-    if (time.length == 1){
-      alert('seconds and milliseconds');
-      // Turn into milliseconds
-    } else if (time.length == 2){
-      alert('minutes, seconds and milliseconds');
-      // Split the minutes and turn into milliseconds
+    // Turn seconds into milliseconds
+    time = (JSON.stringify(time).substring(3, time.length + 1).replace('.', ''));
+    // Get rid of spaces
+    time = time.replace(/ /g, '');
+    // Get rid of first zero
+    if (time.charAt(0) == '0'){
+      time = time.replace('0', '');
     }
+    // Check the length of the string to apply the right algorithm
+    if (time.length > 4 && time.length < 9){
+      time = time.split(':');
+      // Multiply minutes into milliseconds
+      time[0] = time[0] * 60000;
+      // Add all milliseconds together
+      time = time[0] + Number(time[1]);
+      console.log(time);
+      console.log(typeof time);
+    } else if (time.length > 9){
+      time = time.split(':');
+      // Hours and Minutes into milliseconds
+      time[0] = time[0] * 3600000;
+      time[1] = time[1] * 60000;
+      time = time[0] + time[1] + Number(time[2]);
+    }
+    time = Number(time);
+    return;
   }
   // Calcul de la moyenne des 5 dernières résolutions
   var solves5 = [], average5;
   function averageOf5(hours, minutes, seconds, milliseconds) {
-    var average5Milli = hours * 3600000 + minutes * 60000 + seconds * 1000 + milliseconds;
+    var average5Milli = hours * 3600000 + minutes * 60000 + seconds * 1000 + milliseconds + '';
     // if (localStorage.getItem('indexHistory1')){}
     solves5.splice(0, 0, average5Milli);
     // Actualise la dernière clef
     lastKey = Number(localStorage.getItem('indexLog'));
-    if (lastKey > 4){
-      var solveInHistory = solves5.splice(0, 0, localStorage.getItem(`singleHistory${lastKey}`));
+    // Check if there are already solves in history and put them in solves5 array
+    if (lastKey < 5){
+      average5 = '-';
+    } else if (lastKey > 4){
+      var solveInHistory = localStorage.getItem(`singleHistory${lastKey}`);
       unfoldTime(solveInHistory);
+      solves5.splice(0, 0, solveInHistory);
       for (var i = 0; i < 3; i++ ){
         lastKey--;
         solveInHistory = localStorage.getItem(`singleHistory${lastKey}`);
         unfoldTime(solveInHistory);
         solves5.splice(0, 0, solveInHistory);
       }
-    }
-    if (solves5.length < 5){
-      average5 = '-';
-    } else {
+      console.log(solves5);
       for (var i = 0; i < 4; i++ ){
         average5Milli += solves5[i];
       }

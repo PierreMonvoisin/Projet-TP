@@ -6,7 +6,6 @@ $(function(){
 
     mouseX = e.pageX;
     mouseY = e.pageY;
-    console.log('mouseY = ' + mouseY);
     if ( mouseY < 2) {
       $('header').slideDown('fast');
     }
