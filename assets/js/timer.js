@@ -285,14 +285,14 @@ $(function(){
       time[1] = time[1] * 60000;
       time = time[0] + time[1] + Number(time[2]);
     }
-    time = Number(time);
-    return;
+    solveInHistory = Number(time);
+    return solveInHistory;
   }
   // Calcul de la moyenne des 5 dernières résolutions
   var solves5 = [], average5;
   function averageOf5(hours, minutes, seconds, milliseconds) {
     var average5Milli = hours * 3600000 + minutes * 60000 + seconds * 1000 + milliseconds + '';
-    // if (localStorage.getItem('indexHistory1')){}
+    average5Milli = Number(average5Milli);
     solves5.splice(0, 0, average5Milli);
     // Actualise la dernière clef
     lastKey = Number(localStorage.getItem('indexLog'));
@@ -301,16 +301,15 @@ $(function(){
       average5 = '-';
     } else if (lastKey > 4){
       var solveInHistory = localStorage.getItem(`singleHistory${lastKey}`);
-      unfoldTime(solveInHistory);
+      solveInHistory = unfoldTime(solveInHistory);
       solves5.splice(0, 0, solveInHistory);
       for (var i = 0; i < 3; i++ ){
         lastKey--;
         solveInHistory = localStorage.getItem(`singleHistory${lastKey}`);
-        unfoldTime(solveInHistory);
+        solveInHistory = unfoldTime(solveInHistory);
         solves5.splice(0, 0, solveInHistory);
       }
-      console.log(solves5);
-      for (var i = 0; i < 4; i++ ){
+      for (i = 0; i < 4; i++ ){
         average5Milli += solves5[i];
       }
       average5Milli = average5Milli / 5;
