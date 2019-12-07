@@ -297,9 +297,9 @@ $(function(){
     // Actualise la dernière clef
     lastKey = Number(localStorage.getItem('indexLog'));
     // Check if there are already solves in history and put them in solves5 array
-    if (lastKey < 5){
+    if (lastKey < 4){
       average5 = '-';
-    } else if (lastKey > 4){
+    } else if (lastKey > 3){
       var solveInHistory = localStorage.getItem(`singleHistory${lastKey}`);
       solveInHistory = unfoldTime(solveInHistory);
       solves5.splice(0, 0, solveInHistory);
@@ -333,10 +333,23 @@ $(function(){
   var solves12 = [], average12;
   function averageOf12(hours, minutes, seconds, milliseconds) {
     var average12Milli = hours * 3600000 + minutes * 60000 + seconds * 1000 + milliseconds;
+    average12Milli = Number(average12Milli);
     solves12.splice(0, 0, average12Milli);
-    if ( solves12.length < 12){
+    // Actualise la dernière clef
+    lastKey = Number(localStorage.getItem('indexLog'));
+    // Check if there are already solves in history and put them in solves5 array
+    if (lastKey < 11){
       average12 = '-';
-    } else {
+    } else if (lastKey > 10){
+      var solveInHistory = localStorage.getItem(`singleHistory${lastKey}`);
+      solveInHistory = unfoldTime(solveInHistory);
+      solves12.splice(0, 0, solveInHistory);
+      for (var i = 0; i < 10; i++ ){
+        lastKey--;
+        solveInHistory = localStorage.getItem(`singleHistory${lastKey}`);
+        solveInHistory = unfoldTime(solveInHistory);
+        solves12.splice(0, 0, solveInHistory);
+      }
       for (var i = 0; i < 11; i++ ){
         average12Milli += solves12[i];
       }
@@ -361,10 +374,23 @@ $(function(){
   var solves50 = [], average50;
   function averageOf50(hours, minutes, seconds, milliseconds) {
     var average50Milli = hours * 3600000 + minutes * 60000 + seconds * 1000 + milliseconds;
+    average50Milli = Number(average50Milli);
     solves50.splice(0, 0, average50Milli);
-    if ( solves50.length < 50){
+    // Actualise la dernière clef
+    lastKey = Number(localStorage.getItem('indexLog'));
+    // Check if there are already solves in history and put them in solves5 array
+    if (lastKey < 49){
       average50 = '-';
-    } else {
+    } else if (lastKey > 48){
+      var solveInHistory = localStorage.getItem(`singleHistory${lastKey}`);
+      solveInHistory = unfoldTime(solveInHistory);
+      solves50.splice(0, 0, solveInHistory);
+      for (var i = 0; i < 48; i++ ){
+        lastKey--;
+        solveInHistory = localStorage.getItem(`singleHistory${lastKey}`);
+        solveInHistory = unfoldTime(solveInHistory);
+        solves50.splice(0, 0, solveInHistory);
+      }
       for (var i = 0; i < 49; i++ ){
         average50Milli += solves50[i];
       }
