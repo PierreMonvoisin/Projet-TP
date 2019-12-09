@@ -3,6 +3,7 @@ html, body {
   scroll-behavior: smooth;
   overflow: hidden;
 }
+/* Personnalised color palette */
 .bg-silver {
   background-color: #D3C0B8;
 }
@@ -18,6 +19,7 @@ html, body {
 .bg-taupe {
   background-color: #463730;
 }
+/* Personnalised color palette */
 header {
   display: none;
 }
@@ -27,6 +29,7 @@ header {
 #buttonLeft {
   margin-top: 25%;
 }
+/* Side stats */
 #timerContainer {
   width: 100vw;
   height: 100vh;
@@ -46,6 +49,7 @@ header {
 #sideStats {
   white-space: nowrap;
 }
+/* Main scramble and timer */
 #scramble, #timer {
   position: relative;
 }
@@ -59,6 +63,7 @@ header {
 #timer {
   cursor: default;
 }
+/* Hidden button */
 #controls {
   display: none;
 }

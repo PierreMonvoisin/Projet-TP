@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="fr" dir="ltr">
 <head>
-  <title>Mon premier entraineur de Rubik's Cube</title>
+  <!-- ³ = alt + 0179 -->
+  <title>Compte - Solution³</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link rel="stylesheet" type="text/css" href="assets/css/user.css">
 </head>
-
 <body class="bg-silver">
 
   <header class="bg-taupe row m-0">
@@ -39,7 +39,7 @@
   </div>
   <div id="userStats" class="container w-100">
     <div class="row justify-content-between">
-      <!-- Top statistique -->
+      <!-- History -->
       <div class="userStat py-2 col-12 d-flex my-3 bg-copper justify-content-around">
         <table class="col-5 table bg-light mb-0 text-center">
           <thead>
@@ -75,10 +75,11 @@
             </tr>
           </tbody>
         </table>
+        <!-- Chart -->
         <div class="col-6 p-0" id="chartContainer">
         </div>
       </div>
-
+      <!-- Online Friends -->
       <div class="userStat py-2 col-3 my-3 bg-copper">
         <h5 class="text-center text-white">Liste d'amis</h5>
         <div class="card">
@@ -102,7 +103,7 @@
           </ul>
         </div>
       </div>
-
+      <!-- History log -->
       <div id="history" class="userStat py-2 col-8 my-3 bg-copper">
         <h5 class="text-center text-white">Historique</h5>
         <table class="table text-center">
@@ -128,12 +129,11 @@
       </div>
     </div>
   </div>
-
+  <!-- Mandatory last script links -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
   <script src="assets/js/canvasjs-2.3.2/canvasjs.min.js"></script>
   <script src="assets/js/user.js"></script>
-
 </body>
 </html>

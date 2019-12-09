@@ -1,6 +1,6 @@
 $(function(){
   var mouseX, mouseY;
-
+  // Check mouse position to trigger top navigation tabs
   $(document).mousemove(function(e) {
     mouseX = e.pageX;
     mouseY = e.pageY;
@@ -12,9 +12,9 @@ $(function(){
     }
   });
 
-  // Accès au log des résolutions
+  // Access resolution log
   var index, single, ao5, ao12, ao50;
-  // Affiche les dernières valeurs au chargement de la page
+  // Display last stats on page load
   index = JSON.parse(localStorage.getItem('indexLog'));
   single = JSON.parse(localStorage.getItem('singleLog'));
   ao5 = JSON.parse(localStorage.getItem('averageOf5Log'));
@@ -22,7 +22,7 @@ $(function(){
   ao50 = JSON.parse(localStorage.getItem('averageOf50Log'));
 
   $('#lastSingle').html(single); $('#lastAo5').html(ao5); $('#lastAo12').html(ao12); $('#lastAo50').html(ao50);
-  // Check le localStorage pour les valeurs des résolutions et les affiches dans l'html
+  // Check local storage for solves and display them
   setInterval(function() {
     if (localStorage.getItem('indexHistory')){
       index = JSON.parse(localStorage.getItem('indexLog'));
@@ -47,7 +47,7 @@ $(function(){
   // Graph
   var dataTestX = new Date(2019, 11, 14);
   var dataTestY = 12.563;
-
+  // Chart
   var chart = new CanvasJS.Chart('chartContainer', {
     animationEnabled: true,
     title:{

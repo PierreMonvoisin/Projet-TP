@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="fr" dir="ltr">
 <head>
-  <title>Mon premier entraineur de Rubik's Cube</title>
+  <!-- ³ = alt + 0179 -->
+  <title>Multijoueurs - Solution³</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link rel="stylesheet" type="text/css" href="assets/css/multiplayer.css">
 </head>
-
 <body class="bg-khaki">
 
   <header class="bg-taupe row m-0">
@@ -36,11 +36,11 @@
   <div class="container py-3">
     <div class="row mb-3">
       <div class="mx-auto card-deck col-6">
-        <!-- Carte haut gauche - Algorithm of the week -->
+        <!-- Top left card - Algorithm of the week -->
         <div class="card mb-0">
-          <div class="card-header pt-0 text-center">Alg of the week</div>
+          <p class="card-header pt-2 text-center">Alg of the week</p>
           <div class="card-body py-0">
-            <div class="card-title text-center border border-dark border-left-0 border-right-0 mb-4">F' L B2 R D2 L2 D2 L' B2 D2 R' F2 R2 F' D' F' R2 D' B U2 F</div>
+            <p class="card-title text-center border border-dark border-left-0 border-right-0 mb-4">F' L B2 R D2 L2 D2 L' B2 D2 R' F2 R2 F' D' F' R2 D' B U2 F</p>
             <table class="table table-striped text-center">
               <thead>
                 <tr>
@@ -70,10 +70,10 @@
           </div>
         </div>
       </div>
-      <!-- Carte haut droit - Liste d'amis en ligne -->
+      <!-- Top right card - Online friends -->
       <div class="mx-auto card-deck col-6">
         <div class="card">
-          <div class="card-header text-center">Friends</div>
+          <p class="card-header text-center">Friends</p>
           <div class="card-body">
             <ul class="list-group">
               <li class="list-group-item d-flex justify-content-between align-items-center">
@@ -97,11 +97,11 @@
         </div>
       </div>
     </div>
-    <!-- Carte bas gauche - Battle mode -->
+    <!-- Bottom left card - Battle mode -->
     <div class="row">
       <div class="mx-auto card-deck col-6">
         <div class="card">
-          <div class="card-header text-center">Battle mode</div>
+          <p class="card-header text-center">Battle mode</p>
           <div class="card-body py-0">
             <div class="card-deck h-100 align-content-center">
               <div class="card bg-secondary">
@@ -120,7 +120,7 @@
           </div>
         </div>
       </div>
-      <!-- Carte bas droit - News -->
+      <!-- Bottom right card - News -->
       <div class="mx-auto card-deck col-6">
         <div id="newsCard" class="card">
           <div class="card-header text-center">News</div>
@@ -138,7 +138,7 @@
 
       </div>
     </div>
-
+    <!-- Mandatory last script links -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>

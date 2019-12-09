@@ -1,7 +1,6 @@
 $(function(){
   var mouseX, mouseY;
-
-  // Top nav barre
+  // Check mouse position to trigger top navigation tabs
   $(document).mousemove(function(e) {
     mouseX = e.pageX;
     mouseY = e.pageY;
@@ -22,8 +21,7 @@ $(function(){
       $('#scramble, #timer').animate({right: '+=150px'});
     }
   });
-
-  // Scramble
+  // Scrambles
   var possibleScramble = [
     "U' R F2 U' B F2 D U' B F2 U' L2 F2 U' L R' F' L' U R D' B2 R2 F2 D'",
     "D R2 D' L R2 F U B' U R D' B F2 D U B F R B F' L R' U' L' B2",
@@ -126,24 +124,24 @@ $(function(){
     "U' R' F' D' B' U' L' B2 F2 D' L2 R' F2 U2 L D L B' D' B L' R' F2 U' B'",
     "R' U2 L2 D2 U2 L' R' F D' U2 R D' U2 F' L D2 L' U' B' F' L' D F' L2 F'"
   ];
-  // Affiche un mélange aléatoire au chargement de la page
+  // Display random scramble on page load
   var scramble = possibleScramble[Math.floor(Math.random()*possibleScramble.length)];
   $('#scramble').html('<span class="py-2 px-2 border border-dark">' + scramble + '</span>');
-  // Check si il y déjà des résolutions dans le local storage et les affiches dans la side barre
+  // Check if solve stats already exists and, if so, display them
   var solveNumber;
   var indexHistory;
   if (localStorage.getItem('indexHistory1')){
     var lastKey = localStorage.getItem('indexLog');
-    // Ajout des statistiques à la side barre
+    // Add stats to side barre
     $('#sideStatIndex').html(localStorage.getItem('indexLog'));
     $('#sideStatSingle').html(localStorage.getItem('singleLog').substring(1, localStorage.getItem('singleLog').length - 1));
     $('#sideStatAo5').html(localStorage.getItem('averageOf5Log').substring(1, localStorage.getItem('averageOf5Log').length - 1));
     $('#sideStatAo12').html(localStorage.getItem('averageOf12Log').substring(1, localStorage.getItem('averageOf12Log').length - 1));
     $('#sideStatAo50').html(localStorage.getItem('averageOf50Log').substring(1, localStorage.getItem('averageOf50Log').length - 1));
-    // Ajoute les résolutions existantes
+    // Add existing solves
     for (solveNumber = 1; solveNumber <= localStorage.getItem(`indexLog`); solveNumber++){
       // alert(solveNumber);
-      // Retire le message si il existe déjà des résolutions
+      // Delete "no solve" message
       $('#noSolve').hide();
       var tr, _tr = '</tr>', tdSide, td1, td2, _td = '</td>';
       var singleHistory = localStorage.getItem(`singleHistory${solveNumber}`).substring(1, localStorage.getItem(`singleHistory${solveNumber}`).length - 1);
@@ -159,7 +157,6 @@ $(function(){
   } else {
     alert('noIndexHistory');
   }
-
   // Timer
   var hours = minutes = seconds = milliseconds = 0;
   var prev_hours = prev_minutes = prev_seconds = prev_milliseconds = undefined;
@@ -171,7 +168,7 @@ $(function(){
   if ($("#minutes").html() == '00'){
     $("#minutes, #separatorMinutes").hide();
   }
-  // Indicateur que le timer est prêt
+  // Indicator that timer is ready
   $(document).keypress(function (e) {
     if ($('#start_stop').text() == 'Start'){
       if (e.keyCode == 32) {
@@ -194,7 +191,6 @@ $(function(){
       $("#start_stop").button().click();
     }
   });
-
   // Start/Stop button
   $("#start_stop").button().click(function(){
     // Start button
@@ -262,22 +258,20 @@ $(function(){
   }
   function unfoldTime(time){
     // Turn seconds into milliseconds
-    time = (JSON.stringify(time).substring(3, time.length + 1).replace('.', ''));
-    // Get rid of spaces
-    time = time.replace(/ /g, '');
+    console.log(time)
+    time = (time.substring(3, time.length + 1).replace('.', ''));
     // Get rid of first zero
     if (time.charAt(0) == '0'){
       time = time.replace('0', '');
     }
     // Check the length of the string to apply the right algorithm
-    if (time.length > 4 && time.length < 9){
+    if (time.length > 6 && time.length < 9){
       time = time.split(':');
       // Multiply minutes into milliseconds
-      time[0] = time[0] * 60000;
+      time[0] = Number(time[0]) * 60000;
+      time = time[0] + Number(time[1]);
       // Add all milliseconds together
       time = time[0] + Number(time[1]);
-      console.log(time);
-      console.log(typeof time);
     } else if (time.length > 9){
       time = time.split(':');
       // Hours and Minutes into milliseconds
@@ -288,13 +282,13 @@ $(function(){
     solveInHistory = Number(time);
     return solveInHistory;
   }
-  // Calcul de la moyenne des 5 dernières résolutions
+  // Calculation of the average of 5 solves
   var solves5 = [], average5;
   function averageOf5(hours, minutes, seconds, milliseconds) {
     var average5Milli = hours * 3600000 + minutes * 60000 + seconds * 1000 + milliseconds + '';
     average5Milli = Number(average5Milli);
     solves5.splice(0, 0, average5Milli);
-    // Actualise la dernière clef
+    // Update last key
     lastKey = Number(localStorage.getItem('indexLog'));
     // Check if there are already solves in history and put them in solves5 array
     if (lastKey < 4){
@@ -306,6 +300,7 @@ $(function(){
       for (var i = 0; i < 3; i++ ){
         lastKey--;
         solveInHistory = localStorage.getItem(`singleHistory${lastKey}`);
+        console.log(solveInHistory)
         solveInHistory = unfoldTime(solveInHistory);
         solves5.splice(0, 0, solveInHistory);
       }
@@ -329,15 +324,15 @@ $(function(){
       }
     }
   }
-  // Calcul de la moyenne des 12 dernières résolutions
+  // Calculation of the average of 12 solves
   var solves12 = [], average12;
   function averageOf12(hours, minutes, seconds, milliseconds) {
     var average12Milli = hours * 3600000 + minutes * 60000 + seconds * 1000 + milliseconds;
     average12Milli = Number(average12Milli);
     solves12.splice(0, 0, average12Milli);
-    // Actualise la dernière clef
+    // Update last key
     lastKey = Number(localStorage.getItem('indexLog'));
-    // Check if there are already solves in history and put them in solves5 array
+    // Check if there are already solves in history and put them in solves12 array
     if (lastKey < 11){
       average12 = '-';
     } else if (lastKey > 10){
@@ -360,25 +355,25 @@ $(function(){
       seconds = Math.floor( (average12Milli - (hours * 3600000) - (minutes * 60000)) / 1000 );
       milliseconds = Math.floor(average12Milli - (hours * 3600000) - (minutes * 600000) - (seconds * 1000));
       average12 = hours + ': ' + minutes + ': ' + seconds + '.' + milliseconds;
-      // Check si les heures sont nulles pour ne pas les afficher
+      // Check if hours are null not to display them
       if (hours == 0){
         average12 = minutes + ': ' + seconds + '.' + milliseconds;
       }
-      // Check si les heures et les minutes sont nulles pour ne pas les afficher
+      // Check hours and minutes are null not to display them
       if (hours == 0 && minutes == 0){
         average12 = seconds + '.' + milliseconds;
       }
     }
   }
-  // Calcul de la moyenne des 50 dernières résolutions
+  // Calculation of the average of 50 solves
   var solves50 = [], average50;
   function averageOf50(hours, minutes, seconds, milliseconds) {
     var average50Milli = hours * 3600000 + minutes * 60000 + seconds * 1000 + milliseconds;
     average50Milli = Number(average50Milli);
     solves50.splice(0, 0, average50Milli);
-    // Actualise la dernière clef
+    // Update last key
     lastKey = Number(localStorage.getItem('indexLog'));
-    // Check if there are already solves in history and put them in solves5 array
+    // Check if there are already solves in history and put them in solves50 array
     if (lastKey < 49){
       average50 = '-';
     } else if (lastKey > 48){
@@ -401,17 +396,16 @@ $(function(){
       seconds = Math.floor( (average50Milli - (hours * 3600000) - (minutes * 60000)) / 1000 );
       milliseconds = Math.floor(average50Milli - (hours * 3600000) - (minutes * 600000) - (seconds * 1000));
       average50 = hours + ': ' + minutes + ': ' + seconds + '.' + milliseconds;
-      // Check si les heures sont nulles pour ne pas les afficher
+      // Check if hours are null not to display them
       if (hours == 0){
         average50 = minutes + ': ' + seconds + '.' + milliseconds;
       }
-      // Check si les heures et les minutes sont nulles pour ne pas les afficher
+      // Check hours and minutes are null not to display them
       if (hours == 0 && minutes == 0){
         average50 = seconds + '.' + milliseconds;
       }
     }
   }
-
   // Ajout de la résolution à la side barre
   function addToLog(hours, minutes, seconds, milliseconds){
     // Récupère l'indice de la dernière résolution ou lui attribut "1" si première résolution
@@ -421,69 +415,65 @@ $(function(){
     } else {
       solveIndex = solveIndex + 1;
     }
-    // Check si les heures sont nulles pour ne pas les afficher
+    // Check if hours are null not to display them
     var newTime = hours + ': ' + minutes + ': ' + seconds + '.' + milliseconds;
     if (hours == 0){
       newTime = minutes + ': ' + seconds + '.' + milliseconds;
     }
-    // Check si les heures et les minutes sont nulles pour ne pas les afficher
+    // Check hours and minutes are null not to display them
     if (hours == 0 && minutes == 0){
       newTime = seconds + '.' + milliseconds;
     }
-    // Calcul des moyennes
+    // Launch averages calculations
     averageOf5(hours, minutes, seconds, milliseconds);
     averageOf12(hours, minutes, seconds, milliseconds);
     averageOf50(hours, minutes, seconds, milliseconds);
-    // Retire le message à la première résolution
+    // Delete "no solve" message
     $('#noSolve').hide();
-    // Création d'une nouvelle ligne pour ajouter les informations
+    // Create new line to put the informations
     var tr, _tr = '</tr>', tdSide, td1, td2, _td = '</td>';
     tr = '<tr id="' + solveIndex + '">';
     tdSide = '<td class="py-1 px-2 border border-light border-left-0 border-right-0 border-top-0">';
     td1 = '<td class="py-1 px-2 border border-light border-top-0">';
     td2 = '<td class="py-1 px-2 border border-light border-left-0 border-top-0">';
     $('#solveList tbody').prepend(tr + '\n' + tdSide + '#' + solveIndex + _td + '\n' + td1 + newTime + _td + '\n' + td2 + average5 + _td + '\n' + tdSide + average12 + _td + _tr);
-    // Ajout des informations aux statistiques de la side barre
+    // Launch add to stats function
     addToStats(solveIndex, newTime, average5, average12, average50);
   }
-
-
-  // Ajout des informations aux statistiques de la side barre
+  // Add informations in the side barre
   function addToStats(solveIndex, newTime, average5, average12, average50){
     $('#sideStatIndex').html(solveIndex);
     $('#sideStatSingle').html(newTime);
     $('#sideStatAo5').html(average5);
     $('#sideStatAo12').html(average12);
     $('#sideStatAo50').html(average50);
-    // Ajout des statistiques aux locals storages
+    // Add stats to local storage
     if (typeof(Storage) !== "undefined") {
-      // Retire la dernière résolution du local storage
+      // Delete last solve
       localStorage.removeItem('indexLog');
       localStorage.removeItem('singleLog');
       localStorage.removeItem('averageOf5Log');
       localStorage.removeItem('averageOf12Log');
       localStorage.removeItem('averageOf50Log');
-      // Ajoute la résolution au local storage
+      // Add new solve to temporary log
       localStorage.setItem('indexLog', JSON.stringify(solveIndex));
       localStorage.setItem('singleLog', JSON.stringify(newTime));
       localStorage.setItem('averageOf5Log', JSON.stringify(average5));
       localStorage.setItem('averageOf12Log', JSON.stringify(average12));
       localStorage.setItem('averageOf50Log', JSON.stringify(average50));
       indexHistory = localStorage.getItem('indexLog');
-      // Ajoute la résolution au local storage history
+      // Add solve to history log
       localStorage.setItem(`indexHistory${indexHistory}`, JSON.stringify(solveIndex));
       localStorage.setItem(`singleHistory${indexHistory}`, JSON.stringify(newTime));
       localStorage.setItem(`averageOf5History${indexHistory}`, JSON.stringify(average5));
       localStorage.setItem(`averageOf12History${indexHistory}`, JSON.stringify(average12));
       localStorage.setItem(`averageOf50History${indexHistory}`, JSON.stringify(average50));
-
-      // alert(localStorage.key(indexHistory));
     } else {
-      // Alerte si le navigateur ne supporte pas le local storage
+      // Alert if browser does not support local storage function
       alert('Désolé, notre navigateur ne supporte pas le local storage');
     }
   }
-  // Nettoyage du local storage si besoin
+  // Clear local storage hidden button
   $('#scramble').click(function failSafe(){
     var code = prompt('Secret Password :');
     if (code == 'reset'){
