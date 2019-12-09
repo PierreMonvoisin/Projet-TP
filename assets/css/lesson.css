@@ -46,3 +46,24 @@ header {
 #lessonContainer img {
   width: 8%;
 }
+/* Medial Queries */
+@media only screen and (max-width: 575px) {
+  img[alt='right arrow'] {
+    content: url('https://image.flaticon.com/icons/svg/2223/2223610.svg');
+  }
+  #topPagination div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  #topPagination img {
+    width: 30px;
+  }
+  html, body {
+    overflow: visible;
+    overflow-x: hidden;
+  }
+  body {
+    padding-bottom: 5%;
+  }
+}

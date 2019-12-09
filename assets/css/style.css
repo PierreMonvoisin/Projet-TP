@@ -29,3 +29,38 @@ header {
 #topTabs a {
   color: white;
 }
+/* Buttons */
+.top-button-group img {
+  width: 100px;
+  filter: brightness(0)invert(1);
+}
+.btnTooLarge {
+  width: 40%;
+}
+.left-image {
+  width: 100px;
+  filter: brightness(0)invert(1);
+}
+.right-image {
+  width: 100px;
+  filter: brightness(0)invert(1);
+}
+/* Media Queries */
+@media only screen and (max-width: 768px) {
+  .btn-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 0 !important;
+  }
+  .btn {
+    width: 100%;
+    margin-bottom: 3%;
+  }
+  html, body {
+    overflow: visible;
+    overflow-x: hidden;
+  }
+  body {
+    padding-bottom: 5%;
+  }
+}
