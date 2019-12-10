@@ -258,7 +258,7 @@ $(function(){
   }
   function unfoldTime(time){
     // Turn seconds into milliseconds
-    console.log(time)
+    console.log(time);
     time = (time.substring(3, time.length + 1).replace('.', ''));
     // Get rid of first zero
     if (time.charAt(0) == '0'){
@@ -300,7 +300,7 @@ $(function(){
       for (var i = 0; i < 3; i++ ){
         lastKey--;
         solveInHistory = localStorage.getItem(`singleHistory${lastKey}`);
-        console.log(solveInHistory)
+        console.log(solveInHistory);
         solveInHistory = unfoldTime(solveInHistory);
         solves5.splice(0, 0, solveInHistory);
       }
@@ -345,7 +345,7 @@ $(function(){
         solveInHistory = unfoldTime(solveInHistory);
         solves12.splice(0, 0, solveInHistory);
       }
-      for (var i = 0; i < 11; i++ ){
+      for (i = 0; i < 11; i++ ){
         average12Milli += solves12[i];
       }
       average12Milli = average12Milli / 12;
@@ -386,7 +386,7 @@ $(function(){
         solveInHistory = unfoldTime(solveInHistory);
         solves50.splice(0, 0, solveInHistory);
       }
-      for (var i = 0; i < 49; i++ ){
+      for (i = 0; i < 49; i++ ){
         average50Milli += solves50[i];
       }
       average50Milli = average50Milli / 50;

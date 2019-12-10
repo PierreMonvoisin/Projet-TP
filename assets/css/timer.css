@@ -43,7 +43,6 @@ header {
 }
 #sideTimer {
   display: none;
-  max-width: %;
   height: 100vh;
 }
 #sideStats {
