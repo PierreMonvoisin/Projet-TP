@@ -31,8 +31,28 @@ header {
   color: white;
 }
 .card {
-  max-height: 47vh;
+  height: 47vh;
 }
 #newsCard .card-body {
   overflow-y: scroll;
+}
+/* Media Queries */
+@media only screen and (max-width: 768px) {
+  html, body {
+    overflow-x: hidden;
+    overflow-y: visible;
+  }
+  body {
+    padding-bottom: 1%;
+  }
+  #algoCard, #friendsCard, #newsCard, #battleCard {
+    height: 55vh;
+    margin-top: 5%;
+  }
+  .mainRow {
+    margin-bottom: 0 !important;
+  }
+  #button1v1, #button2v2 {
+    height: 50%;
+  }
 }

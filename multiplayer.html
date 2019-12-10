@@ -34,10 +34,10 @@
   </header>
 
   <div class="container py-3">
-    <div class="row mb-3">
-      <div class="mx-auto card-deck col-6">
+    <div class="row mainRow mb-3">
+      <div class="mx-auto card-deck col-md-6">
         <!-- Top left card - Algorithm of the week -->
-        <div class="card mb-0">
+        <div id="algoCard" class="card mb-0">
           <p class="card-header pt-2 text-center">Alg of the week</p>
           <div class="card-body py-0">
             <p class="card-title text-center border border-dark border-left-0 border-right-0 mb-4">F' L B2 R D2 L2 D2 L' B2 D2 R' F2 R2 F' D' F' R2 D' B U2 F</p>
@@ -71,8 +71,8 @@
         </div>
       </div>
       <!-- Top right card - Online friends -->
-      <div class="mx-auto card-deck col-6">
-        <div class="card">
+      <div class="mx-auto card-deck col-md-6">
+        <div id="friendsCard" class="card">
           <p class="card-header text-center">Friends</p>
           <div class="card-body">
             <ul class="list-group">
@@ -98,20 +98,20 @@
       </div>
     </div>
     <!-- Bottom left card - Battle mode -->
-    <div class="row">
-      <div class="mx-auto card-deck col-6">
-        <div class="card">
+    <div class="row mainRow">
+      <div class="mx-auto card-deck col-md-6">
+        <div id="battleCard" class="card">
           <p class="card-header text-center">Battle mode</p>
           <div class="card-body py-0">
             <div class="card-deck h-100 align-content-center">
               <div class="card bg-secondary">
-                <div class="card-body pt-3">
+                <div id="button1v1" class="card-body pt-3">
                   <h4 class="card-title text-white text-center mb-4">1 vs 1</h4>
                   <button type="button" class="btn btn-block btn-lg btn-warning py-4">Je suis prêt !</button>
                 </div>
               </div>
               <div class="card bg-secondary">
-                <div class="card-body pt-3">
+                <div id="button2v2" class="card-body pt-3">
                   <h4 class="card-title text-white text-center mb-4">2 vs 2</h4>
                   <button type="button" class="btn btn-block btn-lg btn-light py-4">Je suis prêt !</button>
                 </div>
@@ -121,7 +121,7 @@
         </div>
       </div>
       <!-- Bottom right card - News -->
-      <div class="mx-auto card-deck col-6">
+      <div class="mx-auto card-deck col-md-6">
         <div id="newsCard" class="card">
           <div class="card-header text-center">News</div>
           <div class="card-body">
