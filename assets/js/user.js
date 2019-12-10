@@ -1,17 +1,4 @@
 $(function(){
-  var mouseX, mouseY;
-  // Check mouse position to trigger top navigation tabs
-  $(document).mousemove(function(e) {
-    mouseX = e.pageX;
-    mouseY = e.pageY;
-    if ( mouseY < 2) {
-      $('header').slideDown('fast');
-    }
-    if ( mouseY > ($('header').height() + 20)) {
-      $('header').slideUp('slow');
-    }
-  });
-
   // Access resolution log
   var index, single, ao5, ao12, ao50;
   // Display last stats on page load
