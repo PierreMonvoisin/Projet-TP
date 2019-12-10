@@ -1,7 +1,7 @@
 html, body {
   max-width: 100vw;
   scroll-behavior: smooth;
-  overflow: hidden;
+  overflow-x: hidden;
 }
 body {
   max-height: 100vh;
@@ -35,14 +35,6 @@ header {
 #pageBody {
   height: 100vh;
 }
-#lessons {
-  overflow-y: scroll;
-  height: 84vh;
-}
-/* Bug avec l'overflow, margin-top necessaire mais pas viable */
-#lessons .card:first-child {
-  margin-top: 30%;
-}
 #lessonContainer img {
   width: 8%;
 }
@@ -59,10 +51,8 @@ header {
   #topPagination img {
     width: 30px;
   }
-  html, body {
-    overflow: visible;
-    overflow-x: hidden;
-  }
+}
+@media only screen and (max-width: 768px) {
   body {
     padding-bottom: 5%;
   }
