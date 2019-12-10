@@ -39,6 +39,12 @@ header {
   width: 8%;
 }
 /* Medial Queries */
+/* Mobile phone */
+@media only screen and (max-width: 768px) {
+  body {
+    padding-bottom: 5%;
+  }
+}
 @media only screen and (max-width: 575px) {
   img[alt='right arrow'] {
     content: url('https://image.flaticon.com/icons/svg/2223/2223610.svg');
@@ -50,10 +56,5 @@ header {
   }
   #topPagination img {
     width: 30px;
-  }
-}
-@media only screen and (max-width: 768px) {
-  body {
-    padding-bottom: 5%;
   }
 }

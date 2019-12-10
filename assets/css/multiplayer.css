@@ -30,13 +30,45 @@ header {
 #topTabs a {
   color: white;
 }
-.card {
+#algoCard, #friendsCard, #newsCard, #battleCard {
   height: 47vh;
+}
+#algoCard .card-body {
+  overflow-y: scroll;
+}
+#algoCard table {
+  white-space: nowrap;
+}
+#battleCard {
+  white-space: nowrap;
 }
 #newsCard .card-body {
   overflow-y: scroll;
 }
 /* Media Queries */
+/* Tablets */
+@media only screen and (max-width: 992px) {
+  /* Friends Card */
+  #friendsCard .card-body {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  /* Battle Card */
+  #battleCard .card-deck {
+    display: flex;
+    flex-direction: column;
+    white-space: nowrap;
+  }
+  #button1v1, #button2v2 {
+    display: flex;
+    justify-content: space-around;
+  }
+  #button1v1 h4, #button2v2 h4 {
+    margin: auto;
+    margin-right: 10%;
+  }
+}
+/* Mobile phone */
 @media only screen and (max-width: 768px) {
   html, body {
     overflow-x: hidden;
@@ -46,13 +78,23 @@ header {
     padding-bottom: 1%;
   }
   #algoCard, #friendsCard, #newsCard, #battleCard {
-    height: 55vh;
+    height: 53vh;
     margin-top: 5%;
   }
   .mainRow {
     margin-bottom: 0 !important;
   }
-  #button1v1, #button2v2 {
-    height: 50%;
+  /* Battle card */
+  #battleCard .card-deck {
+    display: block;
+  }
+  #card2v2 {
+    margin-top: 5%;
+  }
+}
+/* Very small screen */
+@media only screen and (max-width: 350px) {
+  #algoCard .card-body {
+    padding: 0;
   }
 }
