@@ -48,6 +48,10 @@ header {
 /* Media Queries */
 /* Tablets */
 @media only screen and (max-width: 992px) {
+  /* Algo card */
+  #algoCard .card-body {
+    padding: 0;
+  }
   /* Friends Card */
   #friendsCard .card-body {
     padding-left: 0;
@@ -62,6 +66,7 @@ header {
   #button1v1, #button2v2 {
     display: flex;
     justify-content: space-around;
+    padding: 4px 20px 4px 20px !important;
   }
   #button1v1 h4, #button2v2 h4 {
     margin: auto;
@@ -88,13 +93,12 @@ header {
   #battleCard .card-deck {
     display: block;
   }
-  #card2v2 {
-    margin-top: 5%;
+  #battleCard .card {
+    margin-bottom: 0;
   }
-}
-/* Very small screen */
-@media only screen and (max-width: 350px) {
-  #algoCard .card-body {
-    padding: 0;
+  #button1v1, #button2v2 {
+    display: flex;
+    justify-content: space-around;
+    padding: 17px 20px 17px 20px !important;
   }
 }
