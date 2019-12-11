@@ -20,12 +20,6 @@ html, body {
   background-color: #463730;
 }
 /* Personnalised color palette */
-header {
-  display: none;
-}
-#topTabs a {
-  color: white;
-}
 #buttonLeft {
   margin-top: 25%;
 }

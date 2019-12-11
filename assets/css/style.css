@@ -23,12 +23,6 @@ body {
   background-color: #463730;
 }
 /* Personnalised color palette */
-header {
-  display: none;
-}
-#topTabs a {
-  color: white;
-}
 /* Buttons */
 .top-button-group img {
   width: 100px;
