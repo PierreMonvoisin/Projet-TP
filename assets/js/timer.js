@@ -1,13 +1,15 @@
 $(function(){
   // Side timer stats
-  $('#buttonLeft').click(function() {
+  $('#menuToggle').click(function() {
     if ($('#sideTimer').is(":visible")) {
-      $('#sideTimer').toggle('fast');
-      $('#scramble, #timer').animate({right: '-=150px'});
+      // After animation ends, remove display flex
+      $('#sideTimer').slideToggle('fast', function(){
+        $('#sideTimer').removeClass('d-flex');
+      });
     } else {
-      $('#sideTimer').toggle('fast');
-      $('#scramble, #timer').animate({right: '+=150px'});
-    }
+      $('#sideTimer').slideToggle('fast');
+      $('#sideTimer').addClass('d-flex');
+    } // Need changing because if useless
   });
   // Scrambles
   var possibleScramble = [
