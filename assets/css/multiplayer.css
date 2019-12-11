@@ -9,10 +9,10 @@ body {
 }
 /* Personnalised color palette */
 .bg-silver {
-  background-color: #D3C0B8;
+  background-color: #C1C1C1;
 }
-.bg-khaki {
-  background-color: #D5B9AD;
+.bg-gainsboro {
+  background-color: #E8DCD8;
 }
 .bg-copper {
   background-color: #BF6B44;
@@ -22,6 +22,30 @@ body {
 }
 .bg-taupe {
   background-color: #463730;
+}
+.bg-blue {
+  background-color: #0042A5;
+}
+.bg-green {
+  background-color: #009B48;
+}
+.bg-red {
+  background-color: #ED0427;
+}
+.bg-orange {
+  background-color: #E55000;
+}
+.border-blue {
+  border: 4px ridge #0042A5;
+}
+.border-green {
+  border: 4px ridge #009B48;
+}
+.border-red {
+  border: 4px ridge #ED0427;
+}
+.border-orange {
+  border: 4px ridge #E55000;
 }
 /* Personnalised color palette */
 #algoCard, #friendsCard, #newsCard, #battleCard {
