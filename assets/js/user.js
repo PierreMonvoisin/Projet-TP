@@ -2,12 +2,12 @@ $(function(){
   var lastIndex, lastSolve, lastAo5, lastAo12, lastAo50;
   // Check for solves in the local storage on load
   if (localStorage.getItem('indexLog')){
-    // Get values from the local storage ( typeof = number )
-    lastIndex = Number(JSON.parse(localStorage.getItem('indexLog')));
-    lastSolve = Number(JSON.parse(localStorage.getItem('singleLog')));
-    lastAo5 = Number(JSON.parse(localStorage.getItem('averageOf5Log')));
-    lastAo12 = Number(JSON.parse(localStorage.getItem('averageOf12Log')));
-    lastAo50 = Number(JSON.parse(localStorage.getItem('averageOf50Log')));
+    // Get values from the local storage ( typeof = strings )
+    lastIndex = JSON.parse(localStorage.getItem('indexLog'));
+    lastSolve = JSON.parse(localStorage.getItem('singleLog'));
+    lastAo5 = JSON.parse(localStorage.getItem('averageOf5Log'));
+    lastAo12 = JSON.parse(localStorage.getItem('averageOf12Log'));
+    lastAo50 = JSON.parse(localStorage.getItem('averageOf50Log'));
     // Check if averages are empty
     isNaN(lastAo5) ? lastAo5 = '-': lastAo5;
     isNaN(lastAo12) ? lastAo12 = '-': lastAo12;
@@ -20,12 +20,12 @@ $(function(){
     // Delete "no solve" message
     $('#noSolve').hide();
     // Add solves in localStorage to history
-    for (var numberOfSolve = lastIndex; numberOfSolve > 0; numberOfSolve-- ){
-      var index = Number(JSON.parse(localStorage.getItem(`indexHistory${numberOfSolve}`)));
-      var single = Number(JSON.parse(localStorage.getItem(`singleHistory${numberOfSolve}`)));
-      var ao5 = Number(JSON.parse(localStorage.getItem(`averageOf5History${numberOfSolve}`)));
-      var ao12 = Number(JSON.parse(localStorage.getItem(`averageOf12History${numberOfSolve}`)));
-      var ao50 = Number(JSON.parse(localStorage.getItem(`averageOf50History${numberOfSolve}`)));
+    for (var numberOfSolve = Number(lastIndex); numberOfSolve > 0; numberOfSolve-- ){
+      var index = JSON.parse(localStorage.getItem(`indexHistory${numberOfSolve}`));
+      var single = JSON.parse(localStorage.getItem(`singleHistory${numberOfSolve}`));
+      var ao5 = JSON.parse(localStorage.getItem(`averageOf5History${numberOfSolve}`));
+      var ao12 = JSON.parse(localStorage.getItem(`averageOf12History${numberOfSolve}`));
+      var ao50 = JSON.parse(localStorage.getItem(`averageOf50History${numberOfSolve}`));
       // Check if averages are empty
       isNaN(ao5) ? ao5 = '-': ao5;
       isNaN(ao12) ? ao12 = '-': ao12;

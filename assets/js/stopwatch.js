@@ -128,6 +128,6 @@ $(function(){
     $('#sideStatAo12').html(average12);
     $('#sideStatAo50').html(average50);
     // Call the function to add to the localStorage
-    addToStorage(solveIndex, newTime, average5, average12, average50)
+    addToStorage(solveIndex, newTime, average5, average12, average50);
   }
 });
