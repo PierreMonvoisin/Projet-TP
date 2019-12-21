@@ -1,36 +1,39 @@
 $(function(){
-  // Access resolution log
-  var index, single, ao5, ao12, ao50;
-  // Display last stats on page load
-  index = JSON.parse(localStorage.getItem('indexLog'));
-  single = JSON.parse(localStorage.getItem('singleLog'));
-  ao5 = JSON.parse(localStorage.getItem('averageOf5Log'));
-  ao12 = JSON.parse(localStorage.getItem('averageOf12Log'));
-  ao50 = JSON.parse(localStorage.getItem('averageOf50Log'));
-
-  $('#lastSingle').html(single); $('#lastAo5').html(ao5); $('#lastAo12').html(ao12); $('#lastAo50').html(ao50);
-  // Check local storage for solves and display them
-  setInterval(function() {
-    if (localStorage.getItem('indexHistory')){
-      index = JSON.parse(localStorage.getItem('indexLog'));
-      single = JSON.parse(localStorage.getItem('singleLog'));
-      ao5 = JSON.parse(localStorage.getItem('averageOf5Log'));
-      ao12 = JSON.parse(localStorage.getItem('averageOf12Log'));
-      ao50 = JSON.parse(localStorage.getItem('averageOf50Log'));
-      } else {
-        index = single = ao5 = ao12 = ao50 = '-';
-      }
-
-    $('#lastSingle').html(single); $('#lastAo5').html(ao5); $('#lastAo12').html(ao12); $('#lastAo50').html(ao50);
-    // $('#bestSingle').html(single), $('#bestAo5').html(ao5), $('#bestAo12').html(ao12), $('#bestAo50').html(ao50);
-    // $('#worstSingle').html(single), $('#worstAo5').html(ao5), $('#worstAo12').html(ao12), $('#worstAo50').html(ao50);
-    // Création d'une nouvelle ligne pour ajouter les informations
-
-    // Ajout de la résolution à l'historique
-    // var tr = '<tr id="' + index + '">', _tr = '</tr>', td  = '<td class="py-2">', _td = '</td>';
-    // $('#history tbody').prepend(tr + '\n' + td + '#' + index + _td + '\n' + td + single + _td + '\n' + td + ao5 + _td + '\n' + td + ao12 + _td + '\n' + td + ao50 + _td + _tr);
-  }, 10000);
-
+  var lastIndex, lastSolve, lastAo5, lastAo12, lastAo50;
+  // Check for solves in the local storage on load
+  if (localStorage.getItem('indexLog')){
+    // Get values from the local storage ( typeof = number )
+    lastIndex = Number(JSON.parse(localStorage.getItem('indexLog')));
+    lastSolve = Number(JSON.parse(localStorage.getItem('singleLog')));
+    lastAo5 = Number(JSON.parse(localStorage.getItem('averageOf5Log')));
+    lastAo12 = Number(JSON.parse(localStorage.getItem('averageOf12Log')));
+    lastAo50 = Number(JSON.parse(localStorage.getItem('averageOf50Log')));
+    // Check if averages are empty
+    isNaN(lastAo5) ? lastAo5 = '-': lastAo5;
+    isNaN(lastAo12) ? lastAo12 = '-': lastAo12;
+    isNaN(lastAo50) ? lastAo50 = '-': lastAo50;
+    // Last solves in stats
+    $('#lastSingle').text(lastSolve);
+    $('#lastAo5').text(lastAo5);
+    $('#lastAo12').text(lastAo12);
+    $('#lastAo50').text(lastAo50);
+    // Delete "no solve" message
+    $('#noSolve').hide();
+    // Add solves in localStorage to history
+    for (var numberOfSolve = lastIndex; numberOfSolve > 0; numberOfSolve-- ){
+      var index = Number(JSON.parse(localStorage.getItem(`indexHistory${numberOfSolve}`)));
+      var single = Number(JSON.parse(localStorage.getItem(`singleHistory${numberOfSolve}`)));
+      var ao5 = Number(JSON.parse(localStorage.getItem(`averageOf5History${numberOfSolve}`)));
+      var ao12 = Number(JSON.parse(localStorage.getItem(`averageOf12History${numberOfSolve}`)));
+      var ao50 = Number(JSON.parse(localStorage.getItem(`averageOf50History${numberOfSolve}`)));
+      // Check if averages are empty
+      isNaN(ao5) ? ao5 = '-': ao5;
+      isNaN(ao12) ? ao12 = '-': ao12;
+      isNaN(ao50) ? ao50 = '-': ao50;
+      var tr = '<tr id="' + index + '">', _tr = '</tr>', td  = '<td class="py-2">', _td = '</td>';
+      $('#history tbody').append(tr + '\n' + td + '#' + index + _td + '\n' + td + single + _td + '\n' + td + ao5 + _td + '\n' + td + ao12 + _td + '\n' + td + ao50 + _td + _tr);
+    }
+  }
   // Graph
   var dataTestX = new Date(2019, 11, 14);
   var dataTestY = 12.563;
@@ -110,6 +113,5 @@ $(function(){
         { x: new Date(2019, 11, 21), y: 9.123 }
       ]
     }]
-  });
-  chart.render();
+  }); chart.render();
 });
