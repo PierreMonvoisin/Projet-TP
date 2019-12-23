@@ -16,7 +16,7 @@ function addToStorage(solveIndex, newTime, average5, average12, average50){
     localStorage.setItem('averageOf5Log', JSON.stringify(average5));
     localStorage.setItem('averageOf12Log', JSON.stringify(average12));
     localStorage.setItem('averageOf50Log', JSON.stringify(average50));
-    var indexHistory = localStorage.getItem('indexLog');
+    var indexHistory = JSON.parse(localStorage.getItem('indexLog'));
     // Add solve to local history storage
     localStorage.setItem(`indexHistory${indexHistory}`, JSON.stringify(solveIndex));
     localStorage.setItem(`singleHistory${indexHistory}`, JSON.stringify(newTime));

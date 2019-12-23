@@ -1,6 +1,6 @@
 // Calculation of the average of 5 solves
 var solves5 = [], average5;
-function averageOf5(hours, minutes, seconds, milliseconds) {
+function averageOf5(hours, minutes, seconds, milliseconds, solveIndex) {
   // Transform all parametres to milliseconds
   var average5Milli = hours * 3600000 + minutes * 60000 + seconds * 1000 + milliseconds;
   // Add time to the averages array
