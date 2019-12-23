@@ -114,6 +114,13 @@ $(function(){
     averageOf5(hours, minutes, seconds, milliseconds);
     averageOf12(hours, minutes, seconds, milliseconds);
     averageOf50(hours, minutes, seconds, milliseconds);
+    
+    // ADD CHECK OF LOCAL HISTORY HERE
+    // Check for solveIndex, newTime, average5, average12, average50
+
+    // Put averages under timer
+    $('#averageOf5 span').text(average5);
+    $('#averageOf12 span').text(average12);
     // Create new line to put the informations in solve history
     var tr, _tr = '</tr>', tdSide, td1, td2, _td = '</td>';
     tr = '<tr id="' + solveIndex + '">';
