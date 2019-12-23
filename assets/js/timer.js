@@ -1,4 +1,6 @@
 $(function(){
+  $('#sideTimer').slideToggle('fast');
+  $('#sideTimer').addClass('d-flex');
   // Stats menu toggle
   $('#menuToggle').click(function() {
     if ($('#sideTimer').is(":visible")) {
