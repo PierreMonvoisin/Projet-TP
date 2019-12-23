@@ -11,9 +11,9 @@ $(function(){
     lastAo12 = JSON.parse(localStorage.getItem('averageOf12Log'));
     lastAo50 = JSON.parse(localStorage.getItem('averageOf50Log'));
     // Check if averages are empty
-    isNaN(lastAo5) ? lastAo5 = '-': lastAo5;
-    isNaN(lastAo12) ? lastAo12 = '-': lastAo12;
-    isNaN(lastAo50) ? lastAo50 = '-': lastAo50;
+    isNaN(lastAo5) ? lastAo5 = '-': lastAo5 = parseFloat(lastAo5).toFixed(3);
+    isNaN(lastAo12) ? lastAo12 = '-': lastAo12 = parseFloat(lastAo12).toFixed(3);
+    isNaN(lastAo50) ? lastAo50 = '-': lastAo50 = parseFloat(lastAo50).toFixed(3);
     // Put last solves in stats
     $('#lastSingle').text(lastSingle);
     $('#lastAo5').text(lastAo5);
@@ -34,9 +34,9 @@ $(function(){
     }
     // Check if there was not enough solve to calculate worst time
     // Not enough solve mean '-' in localStorage which return 0 in variable
-    (bestAo5 == 0 || bestAo5 == 999999999999) ? bestAo5 = '-' : bestAo5;
-    (bestAo12 == 0 || bestAo12 == 999999999999) ? bestAo12 = '-' : bestAo12;
-    (bestAo50 == 0 || bestAo50 == 999999999999) ? bestAo50 = '-' : bestAo50;
+    (bestAo5 == 0 || bestAo5 == 999999999999) ? bestAo5 = '-' : bestAo5 = bestAo5.toFixed(3);
+    (bestAo12 == 0 || bestAo12 == 999999999999) ? bestAo12 = '-' : bestAo12 = bestAo12.toFixed(3);
+    (bestAo50 == 0 || bestAo50 == 999999999999) ? bestAo50 = '-' : bestAo50 = bestAo50.toFixed(3);
     // Put worst solves in stats
     $('#bestSingle').text(bestSingle);
     $('#bestAo5').text(bestAo5);
@@ -55,9 +55,9 @@ $(function(){
       testWorst = Number(JSON.parse(localStorage.getItem(`averageOf50History${numberOfSolve}`)));
       testWorst > worstAo50 ? worstAo50 = testWorst : worstAo50;
     }
-    worstAo5 == 0 ? worstAo5 = '-' : worstAo5;
-    worstAo12 == 0 ? worstAo12 = '-' : worstAo12;
-    worstAo50 == 0 ? worstAo50 = '-' : worstAo50;
+    worstAo5 == 0 ? worstAo5 = '-' : worstAo5 = worstAo5.toFixed(3);
+    worstAo12 == 0 ? worstAo12 = '-' : worstAo12 = worstAo12.toFixed(3);
+    worstAo50 == 0 ? worstAo50 = '-' : worstAo50 = worstAo50.toFixed(3);
     // Put worst solves in stats
     $('#worstSingle').text(worstSingle);
     $('#worstAo5').text(worstAo5);
@@ -72,12 +72,13 @@ $(function(){
       var ao5 = JSON.parse(localStorage.getItem(`averageOf5History${numberOfSolve}`));
       var ao12 = JSON.parse(localStorage.getItem(`averageOf12History${numberOfSolve}`));
       var ao50 = JSON.parse(localStorage.getItem(`averageOf50History${numberOfSolve}`));
-      // Check if averages are empty
-      isNaN(ao5) ? ao5 = '-': ao5;
-      isNaN(ao12) ? ao12 = '-': ao12;
-      isNaN(ao50) ? ao50 = '-': ao50;
+      // Check if averages are empty ( typeof string )
+      isNaN(ao5) ? ao5 = '-': ao5 = parseFloat(ao5).toFixed(3);
+      // ParseFloat to turn string to number and keep 3 numbers after the dot
+      isNaN(ao12) ? ao12 = '-': ao12 = parseFloat(ao12).toFixed(3);
+      isNaN(ao50) ? ao50 = '-': ao50 = parseFloat(ao50).toFixed(3);
       var tr = '<tr id="' + index + '">', _tr = '</tr>', td  = '<td class="py-2">', _td = '</td>';
-      $('#history tbody').append(tr + '\n' + td + '#' + index + _td + '\n' + td + single + _td + '\n' + td + ao5 + _td + '\n' + td + ao12 + _td + '\n' + td + ao50 + _td + _tr);
+      $('#history tbody').append(tr + '\n' + td + '#' + index + _td + '\n' + td + parseFloat(single).toFixed(3) + _td + '\n' + td + ao5 + _td + '\n' + td + ao12 + _td + '\n' + td + ao50 + _td + _tr);
     }
   }
   // Graph
