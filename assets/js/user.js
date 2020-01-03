@@ -15,7 +15,7 @@ $(function(){
     isNaN(lastAo12) ? lastAo12 = '-': lastAo12 = parseFloat(lastAo12).toFixed(3);
     isNaN(lastAo50) ? lastAo50 = '-': lastAo50 = parseFloat(lastAo50).toFixed(3);
     // Put last solves in stats
-    $('#lastSingle').text(lastSingle);
+    $('#lastSingle').text(parseFloat(lastSingle).toFixed(3));
     $('#lastAo5').text(lastAo5);
     $('#lastAo12').text(lastAo12);
     $('#lastAo50').text(lastAo50);
@@ -38,7 +38,7 @@ $(function(){
     (bestAo12 == 0 || bestAo12 == 999999999999) ? bestAo12 = '-' : bestAo12 = bestAo12.toFixed(3);
     (bestAo50 == 0 || bestAo50 == 999999999999) ? bestAo50 = '-' : bestAo50 = bestAo50.toFixed(3);
     // Put worst solves in stats
-    $('#bestSingle').text(bestSingle);
+    $('#bestSingle').text(bestSingle.toFixed(3));
     $('#bestAo5').text(bestAo5);
     $('#bestAo12').text(bestAo12);
     $('#bestAo50').text(bestAo50);
@@ -59,7 +59,7 @@ $(function(){
     worstAo12 == 0 ? worstAo12 = '-' : worstAo12 = worstAo12.toFixed(3);
     worstAo50 == 0 ? worstAo50 = '-' : worstAo50 = worstAo50.toFixed(3);
     // Put worst solves in stats
-    $('#worstSingle').text(worstSingle);
+    $('#worstSingle').text(worstSingle.toFixed(3));
     $('#worstAo5').text(worstAo5);
     $('#worstAo12').text(worstAo12);
     $('#worstAo50').text(worstAo50);
